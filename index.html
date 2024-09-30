@@ -19,6 +19,7 @@
             align-items: center;
             font-family: 'Comic Sans MS', cursive, sans-serif;
             overflow: hidden;
+            background: #ff69b4; /* Fallback background */
         }
 
         /* Background with blur */
@@ -30,44 +31,6 @@
             background-size: cover;
             filter: blur(10px);
             z-index: -1;
-        }
-
-        /* Main content style */
-        .content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            display: none; /* Hidden by default */
-        }
-
-        .content h2 {
-            font-size: 32px;
-            color: #ff69b4;
-            margin-bottom: 10px;
-        }
-
-        .content p {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .content button {
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #ff69b4;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-
-        .content button:hover {
-            background-color: #ff85a2;
         }
 
         /* Pop-up style */
@@ -82,7 +45,7 @@
             text-align: center;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 100;
-            display: none;
+            display: none; /* Hidden by default */
             opacity: 0;
             animation: fadeIn 0.5s forwards;
         }
@@ -122,9 +85,42 @@
             background-color: #ff85a2;
         }
 
-        /* Welcome Popup */
-        #welcomePopup {
-            display: block; /* Show by default */
+        /* Main content style */
+        .content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            display: none; /* Hidden by default */
+        }
+
+        .content h2 {
+            font-size: 32px;
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .content button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .content button:hover {
+            background-color: #ff85a2;
         }
     </style>
 </head>
@@ -187,6 +183,7 @@
 
         // Show the welcome popup on page load
         window.onload = function() {
+            document.getElementById('welcomePopup').style.display = 'block'; // Show welcome popup
             document.body.classList.add('blurred'); // Blur background on load
         }
     </script>
