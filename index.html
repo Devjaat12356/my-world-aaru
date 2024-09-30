@@ -136,6 +136,36 @@
             background-color: #1e1e1e;
         }
 
+        .sticky-note {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff8dc;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            font-family: 'Comic Sans MS', sans-serif;
+            font-size: 1.8em;
+            text-align: center;
+            z-index: 30;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .sticky-note p {
+            margin: 10px 0;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 4em;
@@ -146,6 +176,9 @@
             button {
                 font-size: 1.2em;
                 padding: 10px 40px;
+            }
+            .sticky-note {
+                font-size: 1.2em;
             }
         }
     </style>
@@ -185,6 +218,11 @@
         <button onclick="closeNoPopup()">Close</button>
     </div>
 
+    <div class="sticky-note" id="stickyNote">
+        <p>Happy National Love Day, Aaru! 💖</p>
+        <p>You're my favorite person in the whole world!</p>
+    </div>
+
     <script>
         window.onload = function() {
             document.getElementById('initialPopup').style.display = 'block';
@@ -213,9 +251,10 @@
         }
 
         function startNewPage() {
-            document.querySelector('.content').classList.add('hidden-content');
-            document.getElementById('yesPopup').classList.add('hidden-content');
-            document.getElementById('bgMusic').play();
+            document.querySelector('.content').style.display = 'none';
+            document.getElementById('yesPopup').style.display = 'none';
+            document.body.style.backgroundColor = 'lightpink';
+            document.getElementById('stickyNote').style.display = 'block';
         }
     </script>
 </body>
