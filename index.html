@@ -41,12 +41,19 @@
             }
         }
 
-        /* Content styling */
+        /* Main content styling */
         .content {
             position: relative;
             z-index: 10;
             text-align: center;
             max-width: 90%;
+            opacity: 1; /* Ensure content is visible */
+            transition: opacity 0.5s ease;
+        }
+
+        .blurred {
+            filter: blur(8px); /* Blur effect when pop-up is shown */
+            transition: filter 0.5s ease;
         }
 
         h1 {
@@ -172,8 +179,14 @@
         <source src="your-no-button-music.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- New Message Pop-up -->
+    <div id="newMessagePopup" class="popup">
+        <h2>Hey cutie 💗</h2>
+        <button onclick="letsGo()">Let's Go...</button>
+    </div>
+
     <!-- Foreground Content -->
-    <div class="content">
+    <div class="content" id="mainContent">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
 
@@ -182,12 +195,6 @@
             <button class="yes" onclick="showYesPopup()">Yes</button>
             <button id="noButton" class="no" onclick="showNoPopup()">No</button>
         </div>
-    </div>
-
-    <!-- New Message Pop-up -->
-    <div id="newMessagePopup" class="popup">
-        <h2>Hey cutie 💗</h2>
-        <button onclick="redirectToHome()">Go to Home</button>
     </div>
 
     <!-- Pop-up for Yes -->
@@ -210,7 +217,14 @@
         // Show new message pop-up on page load
         window.onload = function() {
             document.getElementById('newMessagePopup').style.display = 'block';
+            document.getElementById('mainContent').classList.add('blurred'); // Apply blur effect
         };
+
+        // "Let's Go" button action
+        function letsGo() {
+            document.getElementById('newMessagePopup').style.display = 'none';
+            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
+        }
 
         // Show Yes popup
         function showYesPopup() {
@@ -229,11 +243,6 @@
             document.getElementById('noPopup').style.display = 'none';
             noMusic.pause(); // Pause the no button music
             bgMusic.play(); // Resume background music
-        }
-
-        // Redirect to home page
-        function redirectToHome() {
-            window.location.href = 'your-home-page-url.html'; // Replace with your actual home page URL
         }
 
         // "New Page" effect by hiding content
