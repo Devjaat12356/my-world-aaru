@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartoon Style Welcome</title>
+    <title>My World - Aaru</title>
     <style>
-        /* Reset margin and padding */
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -15,139 +15,95 @@
         body, html {
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background-color: #f8e8e8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
             height: 100%;
+        }
+
+        /* Header */
+        header {
+            background-color: #ff69b4;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-        }
-
-        /* Main homepage content hidden by default */
-        .homepage {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
+            padding: 50px 20px;
+            background-color: #fff;
             text-align: center;
-            background-color: #f8e8e8;
         }
 
-        .homepage h1 {
-            color: #ff69b4;
+        .hero img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h2 {
             font-size: 2.5em;
+            margin-top: 20px;
+            color: #ff69b4;
         }
 
-        /* Cartoon-style pop-up box */
+        /* Pop-up */
         .popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 400px;
+            background-color: white;
             padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
+            border-radius: 10px;
             text-align: center;
-            z-index: 1000;
-            opacity: 1;
-            animation: slideDown 1s ease forwards;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100;
         }
 
         .popup h2 {
-            font-size: 24px;
             color: #ff69b4;
         }
 
-        .popup p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
         .popup button {
-            padding: 12px 30px;
             background-color: #ff69b4;
-            color: white;
             border: none;
-            border-radius: 25px;
-            font-size: 18px;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            margin-top: 20px;
         }
 
         .popup button:hover {
-            transform: scale(1.05);
             background-color: #ff85a2;
         }
 
-        /* Blur effect on background */
+        /* Blur effect */
         .blurred {
             filter: blur(10px);
         }
 
-        /* Animation for the pop-up */
-        @keyframes slideDown {
-            0% {
-                transform: translate(-50%, -50%) translateY(-30px);
-                opacity: 0;
-            }
-            100% {
-                transform: translate(-50%, -50%) translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Heart animation */
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            14%, 28% {
-                transform: scale(1.2);
-            }
-        }
-
-        .heart {
-            display: inline-block;
-            color: #ff69b4;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        /* Responsive layout */
-        @media (min-width: 768px) {
-            .popup {
-                max-width: 350px;
-            }
-
-            .homepage h1 {
-                font-size: 3em;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .popup {
-                max-width: 400px;
-            }
-
-            .homepage h1 {
-                font-size: 3.5em;
-            }
-        }
-
-        /* Cartoon-style background animation (optional) */
-        .cartoon-bg {
+        /* Footer */
+        footer {
+            background-color: #ff69b4;
+            padding: 15px;
+            text-align: center;
+            color: white;
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             bottom: 0;
-            background: url('https://i.imgur.com/zlJdIKD.png') no-repeat center center/cover;
-            opacity: 0.2;
-            z-index: -1;
+            width: 100%;
         }
     </style>
 </head>
@@ -155,34 +111,35 @@
 
     <!-- Pop-up content -->
     <div id="popup" class="popup">
-        <h2>Hey Cutie <span class="heart">💗</span></h2>
-        <p>Welcome to my cartoon world!</p>
+        <h2>Hey Cutie 💗</h2>
+        <p>Welcome to My World!</p>
         <button onclick="closePopup()">Let's Go</button>
     </div>
 
-    <!-- Main homepage content -->
-    <div id="homepage" class="homepage">
-        <h1>Welcome to the Homepage!</h1>
-        <p>Now you're in the main content area.</p>
-    </div>
+    <!-- Header -->
+    <header>
+        <h1>My World - Aaru</h1>
+    </header>
 
-    <!-- Optional background for cartoon style -->
-    <div class="cartoon-bg"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://i.imgur.com/zlJdIKD.png" alt="Anime Image">
+        <h2>Welcome to My World</h2>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with ❤️ for Aaru</p>
+    </footer>
 
     <script>
-        // Function to close the popup and show the homepage
+        // Close popup and show homepage content
         function closePopup() {
-            // Hide the popup
             document.getElementById('popup').style.display = 'none';
-
-            // Remove blur effect from body
             document.body.classList.remove('blurred');
-
-            // Show the homepage
-            document.getElementById('homepage').style.display = 'flex';
         }
 
-        // Add the blur effect to the body when the popup is visible
+        // Add blur effect on page load
         window.onload = function() {
             document.body.classList.add('blurred');
         }
