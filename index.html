@@ -16,6 +16,7 @@
             align-items: center;
             overflow: hidden;
             color: white;
+            position: relative;
         }
 
         /* Background with heartbeat animation */
@@ -202,12 +203,13 @@
     <audio id="noMusic">
         <source src="your-no-button-music.mp3" type="audio/mpeg">
     </audio>
+    
     <div id="welcomePopup" class="popup">
         <h2>Hey Cutie 💗</h2>
         <button onclick="letsGo()">Let's Go</button>
     </div>
 
-    <div class="content" id="mainContent">
+    <div class="content" id="mainContent" style="display: none;">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
         <div class="button-container">
@@ -224,7 +226,7 @@
     <div id="cuteMessagePopup" class="popup">
         <h2>Aaru, Happy National Love Day! 💖</h2>
         <p>
-            You make my heart smile! I am so grateful for every moment with you. Happy National Love Day, Aaru! You're my sunshine! 🌞❤️
+            You make my heart smile! Happy National Love Day, Aaru! You're my sunshine! 🌞❤️
         </p>
         <button onclick="closeCuteMessage()">Close</button>
     </div>
@@ -235,13 +237,15 @@
     </div>
 
     <script>
-        window.onload = function() {
+        // Show welcome popup on page click
+        document.body.addEventListener('click', function() {
             document.getElementById('welcomePopup').style.display = 'block';
             document.getElementById('mainContent').classList.add('blurred');
-        };
+        });
 
         function letsGo() {
             document.getElementById('welcomePopup').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block'; // Show main content
             document.getElementById('mainContent').classList.remove('blurred');
         }
 
@@ -263,9 +267,4 @@
         function showCuteMessage() {
             document.getElementById('yesPopup').style.display = 'none';
             document.getElementById('mainContent').classList.add('blurred');
-            document.getElementById('cuteMessagePopup').style.display = 'block';
-        }
-
-        function closeCuteMessage() {
-            document.getElementById('cuteMessagePopup').style.display = 'none';
-            document.getElementById('
+            document.get
