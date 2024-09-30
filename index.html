@@ -50,6 +50,7 @@
             max-width: 90%;
             opacity: 1;
             transition: opacity 0.5s ease;
+            display: none; /* Hidden initially */
         }
 
         .blurred {
@@ -110,7 +111,7 @@
             padding: 20px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
             z-index: 20;
-            display: none;
+            display: none; /* Hidden initially */
             text-align: center;
             max-width: 90%;
             overflow-y: auto;
@@ -129,7 +130,7 @@
             padding: 20px;
             transform: translate(-50%, -50%) rotate(-2deg); /* Slight rotation for a casual look */
             animation: pop-in 0.5s ease-in-out; /* Pop-in animation */
-            display: flex;
+            display: none; /* Hidden initially */
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -151,10 +152,6 @@
             color: #333;
             line-height: 1.5;
             text-align: center;
-        }
-
-        /* Specific styles for the cute message */
-        .popup p {
             padding: 10px;
             border-radius: 10px;
             background: rgba(255, 200, 100, 0.8); /* Light background color for the message */
@@ -209,7 +206,7 @@
         <button onclick="letsGo()">Let's Go</button>
     </div>
 
-    <div class="content" id="mainContent" style="display: none;">
+    <div class="content" id="mainContent">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
         <div class="button-container">
@@ -267,4 +264,4 @@
         function showCuteMessage() {
             document.getElementById('yesPopup').style.display = 'none';
             document.getElementById('mainContent').classList.add('blurred');
-            document.get
+            document.getElementById('cuteMessagePopup').
