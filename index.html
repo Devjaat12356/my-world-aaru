@@ -16,6 +16,7 @@
             align-items: center;
             overflow: hidden;
             color: white;
+            transition: background-color 0.5s ease; /* Smooth transition for background color */
         }
 
         /* Background with heartbeat animation */
@@ -146,9 +147,26 @@
             to { opacity: 1; }
         }
 
-        /* Hidden content class for "new page" effect */
-        .hidden-content {
-            display: none;
+        /* Sticky note styling */
+        .sticky-note {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff1b0; /* Light yellow for sticky note */
+            border: 3px solid #ff6b81; /* Cute border color */
+            border-radius: 10px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            display: none; /* Hidden by default */
+            z-index: 30;
+        }
+
+        .sticky-note h2 {
+            font-size: 1.5em;
+            color: #333;
         }
 
         @media (max-width: 768px) {
@@ -161,6 +179,9 @@
             button {
                 font-size: 1.2em;
                 padding: 10px 40px;
+            }
+            .sticky-note {
+                width: 80%; /* Responsive width for mobile */
             }
         }
     </style>
@@ -200,13 +221,18 @@
     <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button onclick="startNewPage()">Chale</button>
+        <button id="chaleButton" onclick="startNewPage()">Chale</button>
     </div>
 
     <!-- Pop-up for No -->
     <div id="noPopup" class="popup">
         <h2>बताऊ अभी 😒🔪</h2>
         <button onclick="closeNoPopup()">Close</button>
+    </div>
+
+    <!-- Sticky Note for National Love Day -->
+    <div id="stickyNote" class="sticky-note">
+        <h2>Happy National Love Day, Aaru! 💞</h2>
     </div>
 
     <script>
@@ -242,15 +268,4 @@
         function closeNoPopup() {
             document.getElementById('noPopup').style.display = 'none';
             noMusic.pause(); // Pause the no button music
-            bgMusic.play(); // Resume background music
-        }
-
-        // "New Page" effect by hiding content
-        function startNewPage() {
-            document.querySelector('.content').classList.add('hidden-content');
-            document.getElementById('yesPopup').classList.add('hidden-content');
-            bgMusic.play(); // Ensure background music continues
-        }
-    </script>
-</body>
-</html>
+            bgMusic.play(); // Resume background
