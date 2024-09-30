@@ -21,24 +21,52 @@
             overflow: hidden;
         }
 
-        /* Background with heartbeat animation */
+        /* Background with blur */
         .background {
             position: absolute;
             width: 100%;
             height: 100%;
             background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
             background-size: cover;
-            animation: heartbeat-bg 1.5s infinite;
+            filter: blur(10px);
             z-index: -1;
         }
 
-        @keyframes heartbeat-bg {
-            0%, 100% {
-                transform: scale(1);
-            }
-            14%, 28% {
-                transform: scale(1.02);
-            }
+        /* Main content style */
+        .content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .content h2 {
+            font-size: 32px;
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .content button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        .content button:hover {
+            background-color: #ff85a2;
         }
 
         /* Pop-up style */
@@ -63,13 +91,20 @@
             }
         }
 
-        .popup h2 {
-            font-size: 24px;
-            color: #ff69b4;
+        /* Background blur when pop-up is active */
+        .blurred {
+            filter: blur(10px);
         }
 
-        .popup button {
-            margin-top: 20px;
+        /* Kissing teddy and angry teddy styles */
+        .gif {
+            width: 150px;
+            height: auto;
+        }
+
+        /* Close button */
+        .close-btn {
+            margin-top: 15px;
             padding: 10px 20px;
             background-color: #ff69b4;
             border: none;
@@ -80,23 +115,8 @@
             transition: background-color 0.3s;
         }
 
-        .popup button:hover {
+        .close-btn:hover {
             background-color: #ff85a2;
-        }
-
-        /* Heartbeat animation */
-        .heartbeat {
-            display: inline-block;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            14%, 28% {
-                transform: scale(1.1);
-            }
         }
     </style>
 </head>
@@ -104,22 +124,49 @@
 
     <div class="background"></div>
 
-    <!-- Pop-up -->
-    <div id="popup" class="popup">
-        <h2>Hey Cutie <span class="heartbeat">💗</span></h2>
-        <p>Welcome to my world!</p>
-        <button onclick="closePopup()">Let's Go</button>
+    <!-- Main content -->
+    <div class="content">
+        <h2>Hey 💕 Dev ki Aradhana</h2>
+        <p>Do you love me?</p>
+        <button onclick="response('yes')">Yes</button>
+        <button onclick="response('no')">No</button>
+    </div>
+
+    <!-- Pop-up for Yes -->
+    <div id="yesPopup" class="popup">
+        <h2>Ye hui na baat motu 🤭😌</h2>
+        <img class="gif" src="https://media.tenor.com/images/6e119231b428f1aa3a35347fc4fa84a4/tenor.gif" alt="Kissing Teddy">
+        <p><button onclick="alert('Surprise! 🎉')">Click here! Surprise</button></p>
+        <button class="close-btn" onclick="closePopup('yesPopup')">Close</button>
+    </div>
+
+    <!-- Pop-up for No -->
+    <div id="noPopup" class="popup">
+        <h2>Batau abhi 😤🔪</h2>
+        <img class="gif" src="https://media.tenor.com/images/233d05eaf018a8743eb8c715d9aa84d4/tenor.gif" alt="Angry Teddy">
+        <button class="close-btn" onclick="closePopup('noPopup')">Close</button>
     </div>
 
     <script>
-        // Close popup and show background
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
+        // Show appropriate popup and blur background
+        function response(answer) {
+            document.body.classList.add('blurred'); // Apply blur effect
+            if (answer === 'yes') {
+                document.getElementById('yesPopup').style.display = 'block';
+            } else {
+                document.getElementById('noPopup').style.display = 'block';
+            }
         }
 
-        // Show popup on page load
+        // Close pop-ups and remove blur effect
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.body.classList.remove('blurred'); // Remove blur effect
+        }
+
+        // Show main content on page load
         window.onload = function() {
-            document.getElementById('popup').style.display = 'block';
+            document.querySelector('.content').style.display = 'block';
         }
     </script>
 
