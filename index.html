@@ -137,18 +137,8 @@
         }
 
         /* New message pop-up */
-        #newMessagePopup {
-            animation: fadeIn 1s; /* Fade-in animation */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Hidden content class for "new page" effect */
-        .hidden-content {
-            display: none;
+        #cuteMessagePopup {
+            display: none; /* Hidden by default */
         }
 
         @media (max-width: 768px) {
@@ -179,10 +169,10 @@
         <source src="your-no-button-music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- New Message Pop-up -->
-    <div id="newMessagePopup" class="popup">
-        <h2>Happy National Love Day Aaru! 💗</h2>
-        <button onclick="letsGo()">Let's Go...</button>
+    <!-- Welcome Pop-up -->
+    <div id="welcomePopup" class="popup">
+        <h2>Hey Cutie 💗</h2>
+        <button onclick="letsGo()">Let's Go</button>
     </div>
 
     <!-- Foreground Content -->
@@ -203,6 +193,15 @@
         <button onclick="showCuteMessage()">Chale</button>
     </div>
 
+    <!-- Cute Message Pop-up -->
+    <div id="cuteMessagePopup" class="popup">
+        <h2>Aaru, Happy National Love Day! 💖</h2>
+        <p>
+            You are the light of my life, the one who makes my heart skip a beat. Every moment spent with you is a treasure. Your laughter is my favorite sound, and your smile lights up my darkest days. I'm so grateful for you, my love. Together, we can conquer the world! 
+        </p>
+        <button onclick="closeCuteMessage()">Close</button>
+    </div>
+
     <!-- Pop-up for No -->
     <div id="noPopup" class="popup">
         <h2>बताऊ अभी 😒🔪</h2>
@@ -210,19 +209,15 @@
     </div>
 
     <script>
-        // Get audio elements
-        const bgMusic = document.getElementById("bgMusic");
-        const noMusic = document.getElementById("noMusic");
-
-        // Show new message pop-up on page load
+        // Show welcome pop-up on page load
         window.onload = function() {
-            document.getElementById('newMessagePopup').style.display = 'block';
+            document.getElementById('welcomePopup').style.display = 'block';
             document.getElementById('mainContent').classList.add('blurred'); // Apply blur effect
         };
 
         // "Let's Go" button action
         function letsGo() {
-            document.getElementById('newMessagePopup').style.display = 'none';
+            document.getElementById('welcomePopup').style.display = 'none';
             document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
         }
 
@@ -235,29 +230,29 @@
         // Show No popup
         function showNoPopup() {
             document.getElementById('noPopup').style.display = 'block';
-            bgMusic.pause(); // Pause the background music
-            noMusic.play(); // Play the no button music
             document.getElementById('mainContent').classList.add('blurred'); // Blur main content
         }
 
         // Close No popup
         function closeNoPopup() {
             document.getElementById('noPopup').style.display = 'none';
-            noMusic.pause(); // Pause the no button music
-            bgMusic.play(); // Resume background music
             document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
         }
 
         // Show cute message pop-up
         function showCuteMessage() {
-            // Hide everything with blur
-            document.getElementById('yesPopup').style.display = 'none'; // Hide Yes popup
-            document.getElementById('mainContent').classList.add('blurred'); // Apply blur effect
-            document.getElementById('mainContent').style.display = 'none'; // Hide main content
-            
-            // Show new message pop-up
-            const newMessagePopup = document.getElementById('newMessagePopup');
-            newMessagePopup.style.display = 'block';
+            // Hide Yes popup
+            document.getElementById('yesPopup').style.display = 'none'; 
+            // Apply blur effect
+            document.getElementById('mainContent').classList.add('blurred'); 
+            // Show cute message pop-up
+            document.getElementById('cuteMessagePopup').style.display = 'block';
+        }
+
+        // Close cute message pop-up
+        function closeCuteMessage() {
+            document.getElementById('cuteMessagePopup').style.display = 'none'; 
+            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
         }
     </script>
 </body>
