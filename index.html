@@ -28,17 +28,8 @@
             height: 100%;
             background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
             background-size: cover;
-            animation: heartbeat-bg 1.5s infinite;
+            filter: blur(8px); /* Blur the background */
             z-index: -1;
-        }
-
-        @keyframes heartbeat-bg {
-            0%, 100% {
-                transform: scale(1);
-            }
-            14%, 28% {
-                transform: scale(1.02);
-            }
         }
 
         /* Pop-up style */
@@ -47,7 +38,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: white;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
@@ -68,6 +59,11 @@
             color: #ff69b4;
         }
 
+        .popup p {
+            font-size: 18px;
+            color: #ff69b4;
+        }
+
         .popup button {
             margin-top: 20px;
             padding: 10px 20px;
@@ -78,6 +74,7 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
+            margin: 5px;
         }
 
         .popup button:hover {
@@ -106,15 +103,35 @@
 
     <!-- Pop-up -->
     <div id="popup" class="popup">
-        <h2>Hey Cutie <span class="heartbeat">💗</span></h2>
+        <h2>Hey 💕 Dev ki Aradhana <span class="heartbeat">💗</span></h2>
         <p>Welcome to my world!</p>
-        <button onclick="closePopup()">Let's Go</button>
+        <button onclick="nextMessage()">Let's Go</button>
+    </div>
+
+    <!-- Second Pop-up for the love question -->
+    <div id="lovePopup" class="popup" style="display: none;">
+        <p>Do you love me?</p>
+        <button onclick="yesResponse()">Yes</button>
+        <button onclick="noResponse()">No</button>
     </div>
 
     <script>
-        // Close popup and show background
-        function closePopup() {
+        // Close first popup and show second one
+        function nextMessage() {
             document.getElementById('popup').style.display = 'none';
+            document.getElementById('lovePopup').style.display = 'block';
+        }
+
+        // Handle Yes response
+        function yesResponse() {
+            alert("Aww, I love you too!");
+            document.getElementById('lovePopup').style.display = 'none';
+        }
+
+        // Handle No response
+        function noResponse() {
+            alert("Ouch! That hurts! 😢");
+            document.getElementById('lovePopup').style.display = 'none';
         }
 
         // Show popup on page load
