@@ -47,35 +47,33 @@
             z-index: 10;
             text-align: center;
             max-width: 90%;
-            opacity: 1; /* Ensure content is visible */
+            opacity: 1;
             transition: opacity 0.5s ease;
         }
 
         .blurred {
-            filter: blur(8px); /* Blur effect when pop-up is shown */
+            filter: blur(8px);
             transition: filter 0.5s ease;
         }
 
         h1 {
-            font-size: 6em; /* Increased font size */
+            font-size: 6em;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            animation: heartbeat 1s infinite; /* Heartbeat animation */
+            animation: heartbeat 1s infinite;
         }
 
         p {
-            font-size: 2.5em; /* Increased font size */
+            font-size: 2.5em;
         }
 
-        /* Button container for horizontal layout */
         .button-container {
             display: flex;
             justify-content: center;
             gap: 40px;
-            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            flex-wrap: wrap;
             margin-top: 30px;
         }
 
-        /* Button styling */
         button {
             padding: 20px 50px;
             font-size: 1.5em;
@@ -111,10 +109,10 @@
             padding: 20px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
             z-index: 20;
-            display: none; /* Hidden by default */
+            display: none;
             text-align: center;
-            max-width: 90%; /* Responsive max width */
-            overflow-y: auto; /* Allow scrolling if necessary */
+            max-width: 90%;
+            overflow-y: auto;
         }
 
         .popup h2 {
@@ -123,10 +121,27 @@
             color: #333;
         }
 
+        /* Cute Message Pop-up Styles */
+        #cuteMessagePopup {
+            background: #fffa85; /* Sticky note color */
+            border: 3px dashed #ff4b5c; /* Dashed border for sticky note effect */
+            transform: rotate(-1deg); /* Slight rotation for a casual look */
+            animation: pop-in 0.5s ease-in-out; /* Pop-in animation */
+        }
+
+        @keyframes pop-in {
+            from {
+                transform: translate(-50%, -60%) scale(0);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
         .popup p {
-            font-size: 1.2em; /* Responsive font size for message */
-            color: #333; /* Dark color for readability */
-            line-height: 1.5; /* Line height for better spacing */
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.5;
         }
 
         .popup button {
@@ -146,7 +161,7 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 4em; /* Smaller font size for mobile */
+                font-size: 4em;
             }
             p {
                 font-size: 1.5em;
@@ -159,44 +174,32 @@
     </style>
 </head>
 <body>
-    <!-- Background Layer -->
     <div class="background"></div>
-
-    <!-- Background Music -->
     <audio id="bgMusic" loop autoplay>
         <source src="your-background-music.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- No Button Music -->
     <audio id="noMusic">
         <source src="your-no-button-music.mp3" type="audio/mpeg">
     </audio>
-
-    <!-- Welcome Pop-up -->
     <div id="welcomePopup" class="popup">
         <h2>Hey Cutie 💗</h2>
         <button onclick="letsGo()">Let's Go</button>
     </div>
 
-    <!-- Foreground Content -->
     <div class="content" id="mainContent">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
-
-        <!-- Button container for horizontal layout -->
         <div class="button-container">
             <button class="yes" onclick="showYesPopup()">Yes</button>
             <button id="noButton" class="no" onclick="showNoPopup()">No</button>
         </div>
     </div>
 
-    <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
         <button onclick="showCuteMessage()">Chale</button>
     </div>
 
-    <!-- Cute Message Pop-up -->
     <div id="cuteMessagePopup" class="popup">
         <h2>Aaru, Happy National Love Day! 💖</h2>
         <p>
@@ -205,57 +208,46 @@
         <button onclick="closeCuteMessage()">Close</button>
     </div>
 
-    <!-- Pop-up for No -->
     <div id="noPopup" class="popup">
         <h2>बताऊ अभी 😒🔪</h2>
         <button onclick="closeNoPopup()">Close</button>
     </div>
 
     <script>
-        // Show welcome pop-up on page load
         window.onload = function() {
             document.getElementById('welcomePopup').style.display = 'block';
-            document.getElementById('mainContent').classList.add('blurred'); // Apply blur effect
+            document.getElementById('mainContent').classList.add('blurred');
         };
 
-        // "Let's Go" button action
         function letsGo() {
             document.getElementById('welcomePopup').style.display = 'none';
-            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
+            document.getElementById('mainContent').classList.remove('blurred');
         }
 
-        // Show Yes popup
         function showYesPopup() {
-            document.getElementById('mainContent').classList.add('blurred'); // Blur main content
+            document.getElementById('mainContent').classList.add('blurred');
             document.getElementById('yesPopup').style.display = 'block';
         }
 
-        // Show No popup
         function showNoPopup() {
             document.getElementById('noPopup').style.display = 'block';
-            document.getElementById('mainContent').classList.add('blurred'); // Blur main content
+            document.getElementById('mainContent').classList.add('blurred');
         }
 
-        // Close No popup
         function closeNoPopup() {
             document.getElementById('noPopup').style.display = 'none';
-            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
+            document.getElementById('mainContent').classList.remove('blurred');
         }
 
-        // Show cute message pop-up
         function showCuteMessage() {
-            // Hide Yes popup
-            document.getElementById('yesPopup').style.display = 'none'; 
-            // Apply blur effect
-            document.getElementById('mainContent').classList.add('blurred'); 
-            // Show cute message pop-up
+            document.getElementById('yesPopup').style.display = 'none';
+            document.getElementById('mainContent').classList.add('blurred');
             document.getElementById('cuteMessagePopup').style.display = 'block';
         }
 
-        // Close cute message pop-up
         function closeCuteMessage() {
-            document.getElementById('cuteMessagePopup').style.display = 'none'; 
-            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
+            document.getElementById('cuteMessagePopup').style.display = 'none';
+            document.getElementById('mainContent').classList.remove('blurred');
         }
     </script>
 </body>
