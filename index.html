@@ -124,9 +124,16 @@
         /* Cute Message Pop-up Styles */
         #cuteMessagePopup {
             background: #fffa85; /* Sticky note color */
-            border: 3px dashed #ff4b5c; /* Dashed border for sticky note effect */
-            transform: rotate(-1deg); /* Slight rotation for a casual look */
+            border-radius: 10px; /* Rounded corners for a cartoon look */
+            padding: 20px;
+            transform: translate(-50%, -50%) rotate(-2deg); /* Slight rotation for a casual look */
             animation: pop-in 0.5s ease-in-out; /* Pop-in animation */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 80%;
+            width: 300px; /* Fixed width for consistent sizing */
         }
 
         @keyframes pop-in {
@@ -142,6 +149,15 @@
             font-size: 1.2em;
             color: #333;
             line-height: 1.5;
+            text-align: center;
+        }
+
+        /* Specific styles for the cute message */
+        .popup p {
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 200, 100, 0.8); /* Light background color for the message */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .popup button {
@@ -153,6 +169,7 @@
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         .popup button:hover {
@@ -169,6 +186,10 @@
             button {
                 font-size: 1.2em;
                 padding: 10px 40px;
+            }
+
+            #cuteMessagePopup {
+                width: 80%; /* Responsive width */
             }
         }
     </style>
@@ -203,7 +224,7 @@
     <div id="cuteMessagePopup" class="popup">
         <h2>Aaru, Happy National Love Day! 💖</h2>
         <p>
-            You are the light of my life, the one who makes my heart skip a beat. Every moment spent with you is a treasure. Your laughter is my favorite sound, and your smile lights up my darkest days. I'm so grateful for you, my love. Together, we can conquer the world! 
+            You make my heart smile! I am so grateful for every moment with you. Happy National Love Day, Aaru! You're my sunshine! 🌞❤️
         </p>
         <button onclick="closeCuteMessage()">Close</button>
     </div>
@@ -247,8 +268,4 @@
 
         function closeCuteMessage() {
             document.getElementById('cuteMessagePopup').style.display = 'none';
-            document.getElementById('mainContent').classList.remove('blurred');
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('
