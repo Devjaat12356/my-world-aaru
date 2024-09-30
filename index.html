@@ -29,7 +29,7 @@
             background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
             background-size: cover;
             filter: blur(8px); /* Blur the background */
-            animation: heartbeat-bg 1.5s infinite; /* Heartbeat animation */
+            animation: heartbeat-bg 1.5s infinite; /* Heartbeat animation only for background */
             z-index: -1;
         }
 
@@ -55,7 +55,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 100;
             opacity: 0;
-            animation: fadeIn 0.5s forwards, heartbeat 1.5s infinite; /* Heartbeat animation */
+            animation: fadeIn 0.5s forwards;
         }
 
         @keyframes fadeIn {
@@ -89,21 +89,6 @@
 
         .popup button:hover {
             background-color: #ff85a2;
-        }
-
-        /* Heartbeat animation for text and popups */
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            14%, 28% {
-                transform: scale(1.1);
-            }
-        }
-
-        /* Animation for the "Do you love me?" question pop-up */
-        #lovePopup {
-            animation: fadeIn 0.5s forwards, heartbeat 1.5s infinite;
         }
 
     </style>
