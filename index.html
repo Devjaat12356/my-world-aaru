@@ -211,7 +211,7 @@
     <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button id="chaleButton" onclick="startNewPage()">Chle Madam</button>
+        <button id="chaleButton" onclick="startNewPage()">Chle</button>
     </div>
 
     <!-- Pop-up for No -->
@@ -245,7 +245,7 @@
         // Show Yes popup
         function showYesPopup() {
             document.getElementById('yesPopup').style.display = 'block';
-            document.getElementById('chaleButton').innerText = "Chle Madam"; // Change button text
+            document.getElementById('chaleButton').innerText = "Chle"; // Ensure the button text is set
         }
 
         // Show No popup
@@ -264,4 +264,5 @@
 
         // "New Page" effect by hiding content
         function startNewPage() {
-            document.getElementById('mainContent').style.display = 'none'; // Hide main content
+            // Hide main content and show sticky note
+            document
