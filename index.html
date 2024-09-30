@@ -137,16 +137,6 @@
             background: #ff6b81;
         }
 
-        /* New message pop-up */
-        #newMessagePopup {
-            animation: fadeIn 1s; /* Fade-in animation */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         /* Sticky note styling */
         .sticky-note {
             position: fixed;
@@ -221,7 +211,7 @@
     <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button id="chaleButton" onclick="startNewPage()">Chale</button>
+        <button id="chaleButton" onclick="startNewPage()">Chle Madam</button>
     </div>
 
     <!-- Pop-up for No -->
@@ -255,6 +245,7 @@
         // Show Yes popup
         function showYesPopup() {
             document.getElementById('yesPopup').style.display = 'block';
+            document.getElementById('chaleButton').innerText = "Chle Madam"; // Change button text
         }
 
         // Show No popup
@@ -268,4 +259,9 @@
         function closeNoPopup() {
             document.getElementById('noPopup').style.display = 'none';
             noMusic.pause(); // Pause the no button music
-            bgMusic.play(); // Resume background
+            bgMusic.play(); // Resume background music
+        }
+
+        // "New Page" effect by hiding content
+        function startNewPage() {
+            document.getElementById('mainContent').style.display = 'none'; // Hide main content
