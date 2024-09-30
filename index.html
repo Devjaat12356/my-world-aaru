@@ -16,10 +16,8 @@
             align-items: center;
             overflow: hidden;
             color: white;
-            position: relative;
         }
 
-        /* Background with heartbeat animation */
         .background {
             position: absolute;
             top: 0;
@@ -30,38 +28,18 @@
             background-size: cover;
             background-position: center;
             filter: blur(10px);
-            animation: heartbeat 4s infinite ease-in-out;
         }
 
-        @keyframes heartbeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        /* Main content styling */
         .content {
             position: relative;
             z-index: 10;
             text-align: center;
             max-width: 90%;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-            display: none; /* Hidden initially */
-        }
-
-        .blurred {
-            filter: blur(8px);
-            transition: filter 0.5s ease;
         }
 
         h1 {
             font-size: 6em;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            animation: heartbeat 1s infinite;
         }
 
         p {
@@ -92,15 +70,6 @@
             transform: scale(1.1);
         }
 
-        .yes {
-            background-color: #ff4b5c;
-        }
-
-        .no {
-            background-color: #1e1e1e;
-        }
-
-        /* Pop-up styling */
         .popup {
             position: fixed;
             top: 50%;
@@ -111,102 +80,55 @@
             padding: 20px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
             z-index: 20;
-            display: none; /* Hidden initially */
+            display: none;
             text-align: center;
-            max-width: 90%;
-            overflow-y: auto;
+            animation: popup-animation 0.3s;
         }
 
-        .popup h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #333;
+        @keyframes popup-animation {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
         }
 
-        /* Cute Message Pop-up Styles */
-        #cuteMessagePopup {
-            background: #fffa85; /* Sticky note color */
-            border-radius: 10px; /* Rounded corners for a cartoon look */
-            padding: 20px;
-            transform: translate(-50%, -50%) rotate(-2deg); /* Slight rotation for a casual look */
-            animation: pop-in 0.5s ease-in-out; /* Pop-in animation */
-            display: none; /* Hidden initially */
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            max-width: 80%;
-            width: 300px; /* Fixed width for consistent sizing */
-        }
-
-        @keyframes pop-in {
-            from {
-                transform: translate(-50%, -60%) scale(0);
-            }
-            to {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-
-        .popup p {
-            font-size: 1.2em;
-            color: #333;
-            line-height: 1.5;
-            text-align: center;
-            padding: 10px;
+        .sticky-note {
+            background: #ffcc99;
+            border: 2px solid #ff6666;
             border-radius: 10px;
-            background: rgba(255, 200, 100, 0.8); /* Light background color for the message */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+            height: 300px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: none;
+            text-align: center;
         }
 
-        .popup button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            background: #ff4b5c;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
+        .sticky-note h2 {
+            font-size: 1.5em;
+            color: #333;
         }
 
-        .popup button:hover {
-            background: #ff6b81;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 4em;
-            }
-            p {
-                font-size: 1.5em;
-            }
-            button {
-                font-size: 1.2em;
-                padding: 10px 40px;
-            }
-
-            #cuteMessagePopup {
-                width: 80%; /* Responsive width */
-            }
+        .hidden-content {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="background"></div>
+
     <audio id="bgMusic" loop autoplay>
         <source src="your-background-music.mp3" type="audio/mpeg">
     </audio>
-    <audio id="noMusic">
-        <source src="your-no-button-music.mp3" type="audio/mpeg">
-    </audio>
-    
+
     <div id="welcomePopup" class="popup">
         <h2>Hey Cutie 💗</h2>
-        <button onclick="letsGo()">Let's Go</button>
+        <button onclick="loadMainContent()">Let's Go</button>
     </div>
 
-    <div class="content" id="mainContent">
+    <div class="content hidden-content">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
         <div class="button-container">
@@ -217,51 +139,42 @@
 
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button onclick="showCuteMessage()">Chale</button>
+        <button onclick="showStickyNote()">Chale</button>
     </div>
 
-    <div id="cuteMessagePopup" class="popup">
-        <h2>Aaru, Happy National Love Day! 💖</h2>
-        <p>
-            You make my heart smile! Happy National Love Day, Aaru! You're my sunshine! 🌞❤️
-        </p>
-        <button onclick="closeCuteMessage()">Close</button>
-    </div>
-
-    <div id="noPopup" class="popup">
-        <h2>बताऊ अभी 😒🔪</h2>
-        <button onclick="closeNoPopup()">Close</button>
+    <div id="stickyNote" class="sticky-note">
+        <h2>Aaru, you light up my life with your love! Happy National Love Day!</h2>
+        <button onclick="closeStickyNote()">Close</button>
     </div>
 
     <script>
-        // Show welcome popup on page click
-        document.body.addEventListener('click', function() {
+        window.onload = function() {
             document.getElementById('welcomePopup').style.display = 'block';
-            document.getElementById('mainContent').classList.add('blurred');
-        });
+        };
 
-        function letsGo() {
+        function loadMainContent() {
             document.getElementById('welcomePopup').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block'; // Show main content
-            document.getElementById('mainContent').classList.remove('blurred');
+            document.querySelector('.content').classList.remove('hidden-content');
         }
 
         function showYesPopup() {
-            document.getElementById('mainContent').classList.add('blurred');
             document.getElementById('yesPopup').style.display = 'block';
         }
 
         function showNoPopup() {
-            document.getElementById('noPopup').style.display = 'block';
-            document.getElementById('mainContent').classList.add('blurred');
+            alert('Sorry to hear that!'); // You can customize this behavior
         }
 
-        function closeNoPopup() {
-            document.getElementById('noPopup').style.display = 'none';
-            document.getElementById('mainContent').classList.remove('blurred');
-        }
-
-        function showCuteMessage() {
+        function showStickyNote() {
+            document.querySelector('.content').classList.add('hidden-content');
             document.getElementById('yesPopup').style.display = 'none';
-            document.getElementById('mainContent').classList.add('blurred');
-            document.getElementById('cuteMessagePopup').
+            document.getElementById('stickyNote').style.display = 'block';
+        }
+
+        function closeStickyNote() {
+            document.getElementById('stickyNote').style.display = 'none';
+            loadMainContent(); // Redirects back to the main content
+        }
+    </script>
+</body>
+</html>
