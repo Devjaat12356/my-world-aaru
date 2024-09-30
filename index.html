@@ -29,7 +29,17 @@
             background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
             background-size: cover;
             filter: blur(8px); /* Blur the background */
+            animation: heartbeat-bg 1.5s infinite; /* Heartbeat animation */
             z-index: -1;
+        }
+
+        @keyframes heartbeat-bg {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14%, 28% {
+                transform: scale(1.02);
+            }
         }
 
         /* Pop-up style */
@@ -45,7 +55,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 100;
             opacity: 0;
-            animation: fadeIn 0.5s forwards;
+            animation: fadeIn 0.5s forwards, heartbeat 1.5s infinite; /* Heartbeat animation */
         }
 
         @keyframes fadeIn {
@@ -81,12 +91,7 @@
             background-color: #ff85a2;
         }
 
-        /* Heartbeat animation */
-        .heartbeat {
-            display: inline-block;
-            animation: heartbeat 1.5s infinite;
-        }
-
+        /* Heartbeat animation for text and popups */
         @keyframes heartbeat {
             0%, 100% {
                 transform: scale(1);
@@ -95,13 +100,19 @@
                 transform: scale(1.1);
             }
         }
+
+        /* Animation for the "Do you love me?" question pop-up */
+        #lovePopup {
+            animation: fadeIn 0.5s forwards, heartbeat 1.5s infinite;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="background"></div>
 
-    <!-- Pop-up -->
+    <!-- First Pop-up -->
     <div id="popup" class="popup">
         <h2>Hey 💕 Dev ki Aradhana <span class="heartbeat">💗</span></h2>
         <p>Welcome to my world!</p>
