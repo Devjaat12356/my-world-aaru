@@ -1,132 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Page</title>
-  <style>
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body, html {
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      overflow: hidden;
-      /* Add blur to the background */
-      filter: blur(5px);
-    }
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+        }
 
-    /* Background with heartbeat animation */
-    .background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
-      background-size: cover;
-      animation: heartbeat-bg 1.5s infinite;
-      z-index: -1;
-    }
+        /* Background with heartbeat animation */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
+            background-size: cover;
+            animation: heartbeat-bg 1.5s infinite;
+            z-index: -1;
+        }
 
-    @keyframes heartbeat-bg {
-      0%, 100% {
-        transform: scale(1);
-      }
-      14%, 28% {
-        transform: scale(1.02);
-      }
-    }
+        @keyframes heartbeat-bg {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14%, 28% {
+                transform: scale(1.02);
+            }
+        }
 
-    /* Pop-up style */
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      opacity: 0;
-      animation: fadeIn 0.5s forwards;
-    }
+        /* Pop-up style */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
 
-    .popup h2 {
-      font-size: 24px;
-      color: #ff69b4; /* Pink color for the title */
-    }
+        .popup h2 {
+            font-size: 24px;
+            color: #ff69b4;
+        }
 
-    .popup button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #ff69b4; /* Pink color for the buttons */
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-    }
+        .popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
 
-    .popup button:hover {
-      background-color: #ff85a2;
-    }
+        .popup button:hover {
+            background-color: #ff85a2;
+        }
 
-    /* Heartbeat animation */
-    .heartbeat {
-      display: inline-block;
-      animation: heartbeat 1.5s infinite;
-    }
+        /* Heartbeat animation */
+        .heartbeat {
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
 
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
-      }
-      14%, 28% {
-        transform: scale(1.1);
-      }
-    }
-  </style>
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14%, 28% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="background"></div>
+    <div class="background"></div>
 
-  <div id="popup" class="popup">
-    <h2>Hey  Dev ki Aradhana </h2>
-    <p>Do you love me?</p>
-    <button onclick="answerYes()">Yes</button>
-    <button onclick="answerNo()">No</button>
-  </div>
+    <!-- Pop-up -->
+    <div id="popup" class="popup">
+        <h2>Hey Cutie <span class="heartbeat">💗</span></h2>
+        <p>Welcome to my world!</p>
+        <button onclick="closePopup()">Let's Go</button>
+    </div>
 
-  <script>
-    // Show popup on page load
-    window.onload = function() {
-      document.getElementById('popup').style.display = 'block';
-    }
+    <script>
+        // Close popup and show background
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
 
-    function answerYes() {
-      alert("Aww, that's sweet! ");
-    }
-
-    function answerNo() {
-      alert("That's okay! Maybe next time? ");
-    }
-  </script>
+        // Show popup on page load
+        window.onload = function() {
+            document.getElementById('popup').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
