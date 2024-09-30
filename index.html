@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Romantic Page with Music</title>
     <style>
+        /* General Styles */
         body {
             margin: 0;
             padding: 0;
@@ -18,6 +19,7 @@
             color: white;
         }
 
+        /* Background Styling */
         .background {
             position: absolute;
             top: 0;
@@ -40,6 +42,7 @@
             }
         }
 
+        /* Popup for 'Hey Cutie 💗' */
         .popup {
             position: fixed;
             top: 50%;
@@ -66,13 +69,8 @@
             }
         }
 
-        .popup h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .popup button {
+        /* Button Styling */
+        .popup button, .content button {
             padding: 10px 20px;
             font-size: 1.2em;
             border: none;
@@ -83,10 +81,11 @@
             transition: all 0.3s ease;
         }
 
-        .popup button:hover {
+        .popup button:hover, .content button:hover {
             background: #ff6b81;
         }
 
+        /* Content Styling */
         .content {
             position: relative;
             z-index: 10;
@@ -125,18 +124,7 @@
             color: white;
         }
 
-        button:hover {
-            transform: scale(1.1);
-        }
-
-        .yes {
-            background-color: #ff4b5c;
-        }
-
-        .no {
-            background-color: #1e1e1e;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
             h1 {
                 font-size: 4em;
@@ -154,6 +142,7 @@
 <body>
     <div class="background"></div>
 
+    <!-- Audio Elements -->
     <audio id="bgMusic" loop>
         <source src="data:audio/mp3;base64,{{Ishq_Wala_Love_BASE64}}" type="audio/mpeg">
     </audio>
@@ -162,11 +151,13 @@
         <source src="data:audio/mp3;base64,{{Tuchki_Tuiya_BASE64}}" type="audio/mpeg">
     </audio>
 
+    <!-- Initial Popup -->
     <div id="initialPopup" class="popup">
         <h2>Hey Cutie 💗</h2>
         <button onclick="startMusic()">Go to Homepage</button>
     </div>
 
+    <!-- Main Content -->
     <div class="content">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
@@ -176,14 +167,25 @@
         </div>
     </div>
 
+    <!-- Yes Popup -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
         <button onclick="startNewPage()">Chale</button>
     </div>
 
+    <!-- No Popup -->
     <div id="noPopup" class="popup">
         <h2>बताऊ अभी 😒🔪</h2>
         <button onclick="closeNoPopup()">Close</button>
+    </div>
+
+    <!-- New Content After Chale -->
+    <div id="newContent" style="display:none;">
+        <h2 style="font-size: 3em; text-align: center; color: #ff4b5c;">Happy National Love Day Aaru 👀💞</h2>
+        <p style="font-size: 1.8em; text-align: center;">You are the most special person in my life! ❤️</p>
+        <div class="hearts">
+            <!-- Heart animation here -->
+        </div>
     </div>
 
     <script>
@@ -214,9 +216,9 @@
         }
 
         function startNewPage() {
-            document.querySelector('.content').classList.add('hidden-content');
-            document.getElementById('yesPopup').classList.add('hidden-content');
-            document.getElementById('bgMusic').play();
+            document.querySelector('.content').style.display = 'none';
+            document.getElementById('yesPopup').style.display = 'none';
+            document.getElementById('newContent').style.display = 'block';
         }
     </script>
 </body>
