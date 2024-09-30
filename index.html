@@ -1,192 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page</title>
-    <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body, html {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            overflow: hidden;
-            background: #ff69b4; /* Fallback background */
-        }
+    body, html {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      /* Add blur to the background */
+      filter: blur(5px);
+    }
 
-        /* Background with blur */
-        .background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
-            background-size: cover;
-            filter: blur(10px);
-            z-index: -1;
-        }
+    /* Background with heartbeat animation */
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
+      background-size: cover;
+      animation: heartbeat-bg 1.5s infinite;
+      z-index: -1;
+    }
 
-        /* Pop-up style */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            display: none; /* Hidden by default */
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
+    @keyframes heartbeat-bg {
+      0%, 100% {
+        transform: scale(1);
+      }
+      14%, 28% {
+        transform: scale(1.02);
+      }
+    }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
+    /* Pop-up style */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
 
-        /* Background blur when pop-up is active */
-        .blurred {
-            filter: blur(10px);
-        }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
 
-        /* Kissing teddy and angry teddy styles */
-        .gif {
-            width: 150px;
-            height: auto;
-            margin: 15px 0;
-        }
+    .popup h2 {
+      font-size: 24px;
+      color: #ff69b4; /* Pink color for the title */
+    }
 
-        /* Close button */
-        .close-btn {
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #ff69b4;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ff69b4; /* Pink color for the buttons */
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
 
-        .close-btn:hover {
-            background-color: #ff85a2;
-        }
+    .popup button:hover {
+      background-color: #ff85a2;
+    }
 
-        /* Main content style */
-        .content {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            display: none; /* Hidden by default */
-        }
+    /* Heartbeat animation */
+    .heartbeat {
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
 
-        .content h2 {
-            font-size: 32px;
-            color: #ff69b4;
-            margin-bottom: 10px;
-        }
-
-        .content p {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .content button {
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #ff69b4;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s;
-        }
-
-        .content button:hover {
-            background-color: #ff85a2;
-        }
-    </style>
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      14%, 28% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="background"></div>
+  <div class="background"></div>
 
-    <!-- Welcome Pop-up -->
-    <div id="welcomePopup" class="popup">
-        <h2>Hey cutie 💗</h2>
-        <button class="close-btn" onclick="startHomePage()">Let's go!</button>
-    </div>
+  <div id="popup" class="popup">
+    <h2>Hey  Dev ki Aradhana </h2>
+    <p>Do you love me?</p>
+    <button onclick="answerYes()">Yes</button>
+    <button onclick="answerNo()">No</button>
+  </div>
 
-    <!-- Main content -->
-    <div class="content" id="mainContent">
-        <h2>Hey 💕 Dev ki Aradhana</h2>
-        <p>Do you love me?</p>
-        <button onclick="response('yes')">Yes</button>
-        <button onclick="response('no')">No</button>
-    </div>
+  <script>
+    // Show popup on page load
+    window.onload = function() {
+      document.getElementById('popup').style.display = 'block';
+    }
 
-    <!-- Pop-up for Yes -->
-    <div id="yesPopup" class="popup">
-        <h2>Ye hui na baat motu 🤭😌</h2>
-        <img class="gif" src="https://media.tenor.com/images/6e119231b428f1aa3a35347fc4fa84a4/tenor.gif" alt="Kissing Teddy">
-        <p><button onclick="alert('Surprise! 🎉')">Click here! Surprise</button></p>
-        <button class="close-btn" onclick="closePopup('yesPopup')">Close</button>
-    </div>
+    function answerYes() {
+      alert("Aww, that's sweet! ");
+    }
 
-    <!-- Pop-up for No -->
-    <div id="noPopup" class="popup">
-        <h2>Batau abhi 😤🔪</h2>
-        <img class="gif" src="https://media.tenor.com/images/233d05eaf018a8743eb8c715d9aa84d4/tenor.gif" alt="Angry Teddy">
-        <button class="close-btn" onclick="closePopup('noPopup')">Close</button>
-    </div>
-
-    <script>
-        // Function to start the homepage after the welcome popup
-        function startHomePage() {
-            document.getElementById('welcomePopup').style.display = 'none'; // Hide welcome popup
-            document.body.classList.remove('blurred'); // Remove blur effect
-            document.getElementById('mainContent').style.display = 'block'; // Show main content
-        }
-
-        // Show appropriate popup and blur background
-        function response(answer) {
-            document.body.classList.add('blurred'); // Apply blur effect
-            if (answer === 'yes') {
-                document.getElementById('yesPopup').style.display = 'block';
-            } else {
-                document.getElementById('noPopup').style.display = 'block';
-            }
-        }
-
-        // Close pop-ups and remove blur effect
-        function closePopup(popupId) {
-            document.getElementById(popupId).style.display = 'none';
-            document.body.classList.remove('blurred'); // Remove blur effect
-        }
-
-        // Show the welcome popup on page load
-        window.onload = function() {
-            document.getElementById('welcomePopup').style.display = 'block'; // Show welcome popup
-            document.body.classList.add('blurred'); // Blur background on load
-        }
-    </script>
+    function answerNo() {
+      alert("That's okay! Maybe next time? ");
+    }
+  </script>
 
 </body>
 </html>
