@@ -56,7 +56,8 @@
             z-index: 100;
             opacity: 0;
             animation: fadeIn 0.5s forwards;
-            width: 400px;
+            width: 90%;
+            max-width: 400px;
         }
 
         @keyframes fadeIn {
@@ -121,14 +122,14 @@
 
     <!-- Third Pop-up for the NO response -->
     <div id="gifPopup" class="popup gif-popup" style="display: none;">
-        <img src="https://drive.google.com/uc?export=view&id=1X0GO8IIKyzGrHVgempLFAWO5Mt7HMVs1" alt="Angry response GIF">
+        <img src="data:image/gif;base64,R0lGODlhDwAPAKIAAKNfX19fZ2dnZ6e3t7+/bt68zPz8/P3B/8T5qHh9/2C5nJ+gGCAgNDa+fL4WAP///wAAAAAAACH5BAkKAAAALAAAAAAPAA8AAAZDgJ5CgoOEyDBgso5LAAAHrKRCIECUQAEMBCRkAiAkKIYgkJAQgICgKDgAEBFQDwCBAIQBwg8yBMRU3NwW0GDwl8UAA2qAIOiCGAQRUSqZKMgZsWxYYgOSAgA7" alt="Angry response GIF">
         <h2>Batau abhi <span class="emoji">🔪🔪</span></h2>
         <button onclick="closeGifPopup()">Close</button>
     </div>
 
     <!-- Fourth Pop-up for the YES response -->
     <div id="yesPopup" class="popup gif-popup" style="display: none;">
-        <img src="https://drive.google.com/uc?export=view&id=1tq-DiRwcrM1SK2HLr4eNgvIe-RcSZrvq" alt="Cute response GIF">
+        <img src="data:image/gif;base64,R0lGODlhDwAPAKIAAKNfX19fZ2dnZ6e3t7+/bt68zPz8/P3B/8T5qHh9/2C5nJ+gGCAgNDa+fL4WAP///wAAAAAAACH5BAkKAAAALAAAAAAPAA8AAAZDgJ5CgoOEyDBgso5LAAAHrKRCIECUQAEMBCRkAiAkKIYgkJAQgICgKDgAEBFQDwCBAIQBwg8yBMRU3NwW0GDwl8UAA2qAIOiCGAQRUSqZKMgZsWxYYgOSAgA7" alt="Cute response GIF">
         <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="emoji">😌</span></h2>
         <button onclick="openSurprise()">Open it</button>
     </div>
@@ -152,9 +153,10 @@
             document.getElementById('gifPopup').style.display = 'block';
         }
 
-        // Close the GIF popup
+        // Close the GIF popup and show the love question again
         function closeGifPopup() {
             document.getElementById('gifPopup').style.display = 'none';
+            document.getElementById('lovePopup').style.display = 'block';
         }
 
         // Handle the surprise button
