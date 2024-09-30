@@ -91,6 +91,25 @@
             background-color: #ff85a2;
         }
 
+        /* Pop-up for the gif with the message */
+        .gif-popup img {
+            width: 150px;
+            height: auto;
+        }
+
+        .emoji {
+            animation: shake 0.5s infinite alternate;
+        }
+
+        @keyframes shake {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(20deg);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -111,6 +130,13 @@
         <button onclick="noResponse()">No</button>
     </div>
 
+    <!-- Third Pop-up for the GIF with the "Batau abhi 🔪🔪" message -->
+    <div id="gifPopup" class="popup gif-popup" style="display: none;">
+        <h2>Batau abhi <span class="emoji">🔪🔪</span></h2>
+        <img src="/mnt/data/tkthao219-bubududu.gif" alt="Gif">
+        <button onclick="closeGifPopup()">Close</button>
+    </div>
+
     <script>
         // Close first popup and show second one
         function nextMessage() {
@@ -124,10 +150,15 @@
             document.getElementById('lovePopup').style.display = 'none';
         }
 
-        // Handle No response
+        // Handle No response and show GIF popup
         function noResponse() {
-            alert("Ouch! That hurts! 😢");
             document.getElementById('lovePopup').style.display = 'none';
+            document.getElementById('gifPopup').style.display = 'block';
+        }
+
+        // Close the GIF popup
+        function closeGifPopup() {
+            document.getElementById('gifPopup').style.display = 'none';
         }
 
         // Show popup on page load
