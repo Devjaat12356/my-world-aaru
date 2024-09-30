@@ -18,6 +18,7 @@
             color: white;
         }
 
+        /* Background with heartbeat animation */
         .background {
             position: absolute;
             top: 0;
@@ -28,32 +29,53 @@
             background-size: cover;
             background-position: center;
             filter: blur(10px);
+            animation: heartbeat 4s infinite ease-in-out;
         }
 
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Main content styling */
         .content {
             position: relative;
             z-index: 10;
             text-align: center;
             max-width: 90%;
+            opacity: 1; /* Ensure content is visible */
+            transition: opacity 0.5s ease;
+        }
+
+        .blurred {
+            filter: blur(8px); /* Blur effect when pop-up is shown */
+            transition: filter 0.5s ease;
         }
 
         h1 {
-            font-size: 6em;
+            font-size: 6em; /* Increased font size */
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            animation: heartbeat 1s infinite; /* Heartbeat animation */
         }
 
         p {
-            font-size: 2.5em;
+            font-size: 2.5em; /* Increased font size */
         }
 
+        /* Button container for horizontal layout */
         .button-container {
             display: flex;
             justify-content: center;
             gap: 40px;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
             margin-top: 30px;
         }
 
+        /* Button styling */
         button {
             padding: 20px 50px;
             font-size: 1.5em;
@@ -70,6 +92,15 @@
             transform: scale(1.1);
         }
 
+        .yes {
+            background-color: #ff4b5c;
+        }
+
+        .no {
+            background-color: #1e1e1e;
+        }
+
+        /* Pop-up styling */
         .popup {
             position: fixed;
             top: 50%;
@@ -80,101 +111,156 @@
             padding: 20px;
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
             z-index: 20;
-            display: none;
+            display: none; /* Hidden by default */
             text-align: center;
-            animation: popup-animation 0.3s;
+            max-width: 90%; /* Responsive max width */
+            overflow-y: auto; /* Allow scrolling if necessary */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
         }
 
-        @keyframes popup-animation {
-            from { opacity: 0; transform: translate(-50%, -40%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
+        .popup.show {
+            display: block; /* Show popup */
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.05); /* Slight scale animation */
         }
 
-        .sticky-note {
-            background: #ffcc99;
-            border: 2px solid #ff6666;
-            border-radius: 10px;
-            padding: 20px;
-            width: 300px;
-            height: 300px;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            display: none;
-            text-align: center;
-        }
-
-        .sticky-note h2 {
-            font-size: 1.5em;
+        .popup h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
             color: #333;
         }
 
-        .hidden-content {
-            display: none;
+        .popup p {
+            font-size: 1.2em; /* Responsive font size for message */
+            color: #333; /* Dark color for readability */
+            line-height: 1.5; /* Line height for better spacing */
+            padding: 10px; /* Padding for better spacing */
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background: #ff4b5c;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .popup button:hover {
+            background: #ff6b81;
+        }
+
+        /* Sticky note style for cute message pop-up */
+        #cuteMessagePopup {
+            background: #ffeb3b; /* Yellow sticky note color */
+            border: 2px dashed #f44336; /* Dashed border */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            animation: pop-in 0.5s forwards; /* Animation */
+            transform: scale(0); /* Initial scale for animation */
+        }
+
+        @keyframes pop-in {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4em; /* Smaller font size for mobile */
+            }
+            p {
+                font-size: 1.5em;
+            }
+            button {
+                font-size: 1.2em;
+                padding: 10px 40px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Background Layer -->
     <div class="background"></div>
 
+    <!-- Background Music -->
     <audio id="bgMusic" loop autoplay>
         <source src="your-background-music.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- No Button Music -->
+    <audio id="noMusic">
+        <source src="your-no-button-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Welcome Pop-up -->
     <div id="welcomePopup" class="popup">
         <h2>Hey Cutie 💗</h2>
-        <button onclick="loadMainContent()">Let's Go</button>
+        <button onclick="letsGo()">Let's Go</button>
     </div>
 
-    <div class="content hidden-content">
+    <!-- Foreground Content -->
+    <div class="content" id="mainContent">
         <h1>Hello, Dev Ki Aradhana ❤️</h1>
         <p>Do you love me?</p>
+
+        <!-- Button container for horizontal layout -->
         <div class="button-container">
             <button class="yes" onclick="showYesPopup()">Yes</button>
             <button id="noButton" class="no" onclick="showNoPopup()">No</button>
         </div>
     </div>
 
+    <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button onclick="showStickyNote()">Chale</button>
+        <button onclick="showCuteMessage()">Chale</button>
     </div>
 
-    <div id="stickyNote" class="sticky-note">
-        <h2>Aaru, you light up my life with your love! Happy National Love Day!</h2>
-        <button onclick="closeStickyNote()">Close</button>
+    <!-- Cute Message Pop-up -->
+    <div id="cuteMessagePopup" class="popup">
+        <h2>Aaru, Happy National Love Day! 💖</h2>
+        <p>
+            You are the light of my life, the one who makes my heart skip a beat. Every moment spent with you is a treasure. Your laughter is my favorite sound, and your smile lights up my darkest days. I'm so grateful for you, my love. Together, we can conquer the world! 
+        </p>
+        <button onclick="closeCuteMessage()">Close</button>
+    </div>
+
+    <!-- Pop-up for No -->
+    <div id="noPopup" class="popup">
+        <h2>बताऊ अभी 😒🔪</h2>
+        <button onclick="closeNoPopup()">Close</button>
     </div>
 
     <script>
+        // Show welcome pop-up on page load
         window.onload = function() {
             document.getElementById('welcomePopup').style.display = 'block';
+            document.getElementById('mainContent').classList.add('blurred'); // Apply blur effect
         };
 
-        function loadMainContent() {
+        // "Let's Go" button action
+        function letsGo() {
             document.getElementById('welcomePopup').style.display = 'none';
-            document.querySelector('.content').classList.remove('hidden-content');
+            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
         }
 
+        // Show Yes popup
         function showYesPopup() {
+            document.getElementById('mainContent').classList.add('blurred'); // Blur main content
             document.getElementById('yesPopup').style.display = 'block';
         }
 
+        // Show No popup
         function showNoPopup() {
-            alert('Sorry to hear that!'); // You can customize this behavior
-        }
-
-        function showStickyNote() {
-            document.querySelector('.content').classList.add('hidden-content');
-            document.getElementById('yesPopup').style.display = 'none';
-            document.getElementById('stickyNote').style.display = 'block';
-        }
-
-        function closeStickyNote() {
-            document.getElementById('stickyNote').style.display = 'none';
-            loadMainContent(); // Redirects back to the main content
-        }
-    </script>
-</body>
-</html>
+            document.getElementById('noPopup').style.display = 'block';
+            document.get
