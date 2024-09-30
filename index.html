@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Romantic Page</title>
+    <title>Romantic Page with Music</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
             background-color: pink;
-            font-family: 'Brush Script MT', cursive;
+            font-family: 'Arial', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,14 +50,13 @@
         }
 
         h1 {
-            font-size: 6em;
+            font-size: 6em; /* Increased font size */
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            animation: heartbeat 1.5s infinite; /* Heartbeat animation for the title */
+            animation: heartbeat 1s infinite; /* Heartbeat animation */
         }
 
         p {
-            font-size: 2.5em;
-            margin-bottom: 30px;
+            font-size: 2.5em; /* Increased font size */
         }
 
         /* Button container for horizontal layout */
@@ -66,13 +65,13 @@
             justify-content: center;
             gap: 40px;
             flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            margin-top: 30px;
         }
 
         /* Button styling */
         button {
-            position: relative;
-            padding: 20px 60px;
-            font-size: 2em;
+            padding: 20px 50px;
+            font-size: 1.5em;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -94,82 +93,67 @@
             background-color: #1e1e1e;
         }
 
-        /* Emoji styling */
-        .emoji {
-            font-size: 6em;
-            margin-top: 40px;
-            display: none;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Popup styling */
+        /* Pop-up styling */
         .popup {
-            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
             z-index: 20;
+            display: none; /* Hidden by default */
             text-align: center;
-            animation: pop 0.3s ease-in-out;
-        }
-
-        @keyframes pop {
-            0% { transform: translate(-50%, -50%) scale(0.8); }
-            100% { transform: translate(-50%, -50%) scale(1); }
         }
 
         .popup h2 {
-            font-size: 2.5em;
-            color: #ff4b5c;
-            margin: 20px 0;
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
         }
 
-        /* Floating roses */
-        .rose {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-image: url('https://i.imgur.com/6qzOFrV.png');
-            background-size: cover;
-            animation: float 8s infinite ease-in-out;
+        .popup button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background: #ff4b5c;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-600px) rotate(360deg); }
-            100% { transform: translateY(0) rotate(720deg); }
+        .popup button:hover {
+            background: #ff6b81;
+        }
+
+        /* New message pop-up */
+        #newMessagePopup {
+            animation: fadeIn 1s; /* Fade-in animation */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hidden content class for "new page" effect */
+        .hidden-content {
+            display: none;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 4em;
+                font-size: 4em; /* Smaller font size for mobile */
             }
             p {
-                font-size: 1.8em;
+                font-size: 1.5em;
             }
             button {
-                font-size: 1.5em;
-                padding: 10px 30px;
-            }
-            .emoji {
-                font-size: 4em;
+                font-size: 1.2em;
+                padding: 10px 40px;
             }
         }
     </style>
@@ -178,60 +162,85 @@
     <!-- Background Layer -->
     <div class="background"></div>
 
+    <!-- Background Music -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="your-background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- No Button Music -->
+    <audio id="noMusic">
+        <source src="your-no-button-music.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Foreground Content -->
     <div class="content">
-        <h1>Do you love me? ❤️</h1>
-        <p>Hello, Dev Ki Aradhana!</p>
+        <h1>Hello, Dev Ki Aradhana ❤️</h1>
+        <p>Do you love me?</p>
 
         <!-- Button container for horizontal layout -->
         <div class="button-container">
             <button class="yes" onclick="showYesPopup()">Yes</button>
-            <button class="no" onclick="showNoPopup()">No</button>
+            <button id="noButton" class="no" onclick="showNoPopup()">No</button>
         </div>
-
-        <div id="emoji" class="emoji"></div>
     </div>
 
-    <!-- Popups -->
+    <!-- New Message Pop-up -->
+    <div id="newMessagePopup" class="popup">
+        <h2>Hey cutie 💗</h2>
+        <button onclick="redirectToHome()">Go to Home</button>
+    </div>
+
+    <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button onclick="location.href='newpage.html';">चले</button>
+        <button onclick="startNewPage()">Chale</button>
     </div>
 
+    <!-- Pop-up for No -->
     <div id="noPopup" class="popup">
         <h2>बताऊ अभी 😒🔪</h2>
         <button onclick="closeNoPopup()">Close</button>
     </div>
 
-    <!-- Floating Roses -->
-    <div id="roses"></div>
-
     <script>
-        // Function to show Yes popup
+        // Get audio elements
+        const bgMusic = document.getElementById("bgMusic");
+        const noMusic = document.getElementById("noMusic");
+
+        // Show new message pop-up on page load
+        window.onload = function() {
+            document.getElementById('newMessagePopup').style.display = 'block';
+        };
+
+        // Show Yes popup
         function showYesPopup() {
             document.getElementById('yesPopup').style.display = 'block';
-            document.getElementById('emoji').innerHTML = '😁';
-            document.getElementById('emoji').style.display = 'block';
-
-            // Create floating roses
-            for (let i = 0; i < 20; i++) {
-                const rose = document.createElement('div');
-                rose.classList.add('rose');
-                rose.style.left = Math.random() * window.innerWidth + 'px';
-                rose.style.bottom = Math.random() * 100 + 'px';
-                rose.style.animationDuration = 4 + Math.random() * 4 + 's'; // Varying animation duration
-                document.getElementById('roses').appendChild(rose);
-            }
         }
 
-        // Function to show No popup
+        // Show No popup
         function showNoPopup() {
             document.getElementById('noPopup').style.display = 'block';
+            bgMusic.pause(); // Pause the background music
+            noMusic.play(); // Play the no button music
         }
 
-        // Function to close the No popup
+        // Close No popup
         function closeNoPopup() {
             document.getElementById('noPopup').style.display = 'none';
+            noMusic.pause(); // Pause the no button music
+            bgMusic.play(); // Resume background music
+        }
+
+        // Redirect to home page
+        function redirectToHome() {
+            window.location.href = 'your-home-page-url.html'; // Replace with your actual home page URL
+        }
+
+        // "New Page" effect by hiding content
+        function startNewPage() {
+            document.querySelector('.content').classList.add('hidden-content');
+            document.getElementById('yesPopup').classList.add('hidden-content');
+            bgMusic.play(); // Ensure background music continues
         }
     </script>
 </body>
