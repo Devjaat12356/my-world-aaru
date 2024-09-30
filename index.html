@@ -68,12 +68,14 @@
 
         .popup h2 {
             font-size: 24px;
+            font-weight: bold;
             color: #ff69b4;
             margin-bottom: 10px;
         }
 
         .popup p {
             font-size: 18px;
+            font-weight: bold;
             color: #ff69b4;
             margin-bottom: 20px;
         }
@@ -100,11 +102,77 @@
             height: auto;
             margin-bottom: 15px;
         }
+
+        /* Cartoon note popup */
+        .note-popup {
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .note-popup img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Emoji animations */
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14%, 28% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes flower-animation {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes knife-shake {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .heartbeat {
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .flower {
+            display: inline-block;
+            animation: flower-animation 1s infinite;
+        }
+
+        .knife {
+            display: inline-block;
+            animation: knife-shake 0.5s infinite;
+        }
+
+        /* YouTube Player */
+        .youtube-player {
+            display: none; /* Hide the player */
+        }
     </style>
 </head>
 <body>
 
     <div class="background"></div>
+
+    <!-- YouTube Embed for Background Music -->
+    <iframe class="youtube-player" src="https://www.youtube.com/embed/_xRkpblVWec?autoplay=1&loop=1&playlist=_xRkpblVWec&mute=1" width="0" height="0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
     <!-- First Pop-up -->
     <div id="popup" class="popup">
@@ -122,16 +190,24 @@
 
     <!-- Third Pop-up for the NO response -->
     <div id="gifPopup" class="popup gif-popup" style="display: none;">
-        <img src="data:image/gif;base64,R0lGODlhDwAPAKIAAKNfX19fZ2dnZ6e3t7+/bt68zPz8/P3B/8T5qHh9/2C5nJ+gGCAgNDa+fL4WAP///wAAAAAAACH5BAkKAAAALAAAAAAPAA8AAAZDgJ5CgoOEyDBgso5LAAAHrKRCIECUQAEMBCRkAiAkKIYgkJAQgICgKDgAEBFQDwCBAIQBwg8yBMRU3NwW0GDwl8UAA2qAIOiCGAQRUSqZKMgZsWxYYgOSAgA7" alt="Angry response GIF">
-        <h2>Batau abhi <span class="emoji">🔪🔪</span></h2>
+        <img src="https://media.tenor.com/RiQyOcZtLoIAAAAj/tkthao219-bubududu.gif" alt="Angry response GIF">
+        <h2>Batau abhi <span class="knife">🔪🔪</span></h2>
         <button onclick="closeGifPopup()">Close</button>
     </div>
 
     <!-- Fourth Pop-up for the YES response -->
     <div id="yesPopup" class="popup gif-popup" style="display: none;">
-        <img src="data:image/gif;base64,R0lGODlhDwAPAKIAAKNfX19fZ2dnZ6e3t7+/bt68zPz8/P3B/8T5qHh9/2C5nJ+gGCAgNDa+fL4WAP///wAAAAAAACH5BAkKAAAALAAAAAAPAA8AAAZDgJ5CgoOEyDBgso5LAAAHrKRCIECUQAEMBCRkAiAkKIYgkJAQgICgKDgAEBFQDwCBAIQBwg8yBMRU3NwW0GDwl8UAA2qAIOiCGAQRUSqZKMgZsWxYYgOSAgA7" alt="Cute response GIF">
-        <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="emoji">😌</span></h2>
+        <img src="https://media.tenor.com/RG_lIajbbtQAAAAj/milk-and-mocha.gif" alt="Cute response GIF">
+        <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="flower">🌸🌸</span></h2>
         <button onclick="openSurprise()">Open it</button>
+    </div>
+
+    <!-- Fifth Pop-up for Happy National Love Day -->
+    <div id="loveDayPopup" class="popup note-popup" style="display: none;">
+        <img src="https://media.tenor.com/4TSAv5_K3LgAAAAi/kiss-bear-kiss.gif" alt="Kiss Bear GIF">
+        <h2>Happy National Love Day, Aaru! 💖</h2>
+        <p>Wishing you lots of love and happiness today! 🌹</p>
+        <button onclick="closeLoveDayPopup()">Close</button>
     </div>
 
     <script>
@@ -161,8 +237,14 @@
 
         // Handle the surprise button
         function openSurprise() {
-            alert("Surprise opened! 🎉");
             document.getElementById('yesPopup').style.display = 'none';
+            document.getElementById('loveDayPopup').style.display = 'block'; // Show love day popup
+        }
+
+        // Close love day popup and redirect to first popup
+        function closeLoveDayPopup() {
+            document.getElementById('loveDayPopup').style.display = 'none';
+            document.getElementById('popup').style.display = 'block'; // Redirect to first popup
         }
 
         // Show popup on page load
