@@ -228,6 +228,7 @@
 
         // Show Yes popup
         function showYesPopup() {
+            document.getElementById('mainContent').classList.add('blurred'); // Blur main content
             document.getElementById('yesPopup').style.display = 'block';
         }
 
@@ -236,6 +237,7 @@
             document.getElementById('noPopup').style.display = 'block';
             bgMusic.pause(); // Pause the background music
             noMusic.play(); // Play the no button music
+            document.getElementById('mainContent').classList.add('blurred'); // Blur main content
         }
 
         // Close No popup
@@ -243,20 +245,19 @@
             document.getElementById('noPopup').style.display = 'none';
             noMusic.pause(); // Pause the no button music
             bgMusic.play(); // Resume background music
+            document.getElementById('mainContent').classList.remove('blurred'); // Remove blur effect
         }
 
         // Show cute message pop-up
         function showCuteMessage() {
             // Hide everything with blur
-            document.getElementById('mainContent').classList.add('blurred');
             document.getElementById('yesPopup').style.display = 'none'; // Hide Yes popup
+            document.getElementById('mainContent').classList.add('blurred'); // Apply blur effect
             document.getElementById('mainContent').style.display = 'none'; // Hide main content
             
             // Show new message pop-up
             const newMessagePopup = document.getElementById('newMessagePopup');
             newMessagePopup.style.display = 'block';
-            newMessagePopup.innerHTML = `<h2>Happy National Love Day Aaru! 💗</h2>
-                                          <button onclick="letsGo()">Let's Go...</button>`;
         }
     </script>
 </body>
