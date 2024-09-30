@@ -16,7 +16,6 @@
             align-items: center;
             overflow: hidden;
             color: white;
-            transition: background-color 0.5s ease; /* Smooth transition for background color */
         }
 
         /* Background with heartbeat animation */
@@ -137,26 +136,19 @@
             background: #ff6b81;
         }
 
-        /* Sticky note styling */
-        .sticky-note {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff1b0; /* Light yellow for sticky note */
-            border: 3px solid #ff6b81; /* Cute border color */
-            border-radius: 10px;
-            padding: 20px;
-            width: 250px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            display: none; /* Hidden by default */
-            z-index: 30;
+        /* New message pop-up */
+        #newMessagePopup {
+            animation: fadeIn 1s; /* Fade-in animation */
         }
 
-        .sticky-note h2 {
-            font-size: 1.5em;
-            color: #333;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hidden content class for "new page" effect */
+        .hidden-content {
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -169,9 +161,6 @@
             button {
                 font-size: 1.2em;
                 padding: 10px 40px;
-            }
-            .sticky-note {
-                width: 80%; /* Responsive width for mobile */
             }
         }
     </style>
@@ -192,7 +181,7 @@
 
     <!-- New Message Pop-up -->
     <div id="newMessagePopup" class="popup">
-        <h2>Hey cutie 💗</h2>
+        <h2>Happy National Love Day Aaru! 💗</h2>
         <button onclick="letsGo()">Let's Go...</button>
     </div>
 
@@ -211,18 +200,13 @@
     <!-- Pop-up for Yes -->
     <div id="yesPopup" class="popup">
         <h2>ये हुई ना बात मोटू 😁</h2>
-        <button id="chaleButton" onclick="startNewPage()">Chle</button>
+        <button onclick="showCuteMessage()">Chale</button>
     </div>
 
     <!-- Pop-up for No -->
     <div id="noPopup" class="popup">
         <h2>बताऊ अभी 😒🔪</h2>
         <button onclick="closeNoPopup()">Close</button>
-    </div>
-
-    <!-- Sticky Note for National Love Day -->
-    <div id="stickyNote" class="sticky-note">
-        <h2>Happy National Love Day, Aaru! 💞</h2>
     </div>
 
     <script>
@@ -245,7 +229,6 @@
         // Show Yes popup
         function showYesPopup() {
             document.getElementById('yesPopup').style.display = 'block';
-            document.getElementById('chaleButton').innerText = "Chle"; // Ensure the button text is set
         }
 
         // Show No popup
@@ -262,7 +245,19 @@
             bgMusic.play(); // Resume background music
         }
 
-        // "New Page" effect by hiding content
-        function startNewPage() {
-            // Hide main content and show sticky note
-            document
+        // Show cute message pop-up
+        function showCuteMessage() {
+            // Hide everything with blur
+            document.getElementById('mainContent').classList.add('blurred');
+            document.getElementById('yesPopup').style.display = 'none'; // Hide Yes popup
+            document.getElementById('mainContent').style.display = 'none'; // Hide main content
+            
+            // Show new message pop-up
+            const newMessagePopup = document.getElementById('newMessagePopup');
+            newMessagePopup.style.display = 'block';
+            newMessagePopup.innerHTML = `<h2>Happy National Love Day Aaru! 💗</h2>
+                                          <button onclick="letsGo()">Let's Go...</button>`;
+        }
+    </script>
+</body>
+</html>
