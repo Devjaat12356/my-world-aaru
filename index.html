@@ -40,6 +40,7 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
+            display: none; /* Hidden by default */
         }
 
         .content h2 {
@@ -81,6 +82,7 @@
             text-align: center;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             z-index: 100;
+            display: none;
             opacity: 0;
             animation: fadeIn 0.5s forwards;
         }
@@ -100,6 +102,7 @@
         .gif {
             width: 150px;
             height: auto;
+            margin: 15px 0;
         }
 
         /* Close button */
@@ -118,14 +121,25 @@
         .close-btn:hover {
             background-color: #ff85a2;
         }
+
+        /* Welcome Popup */
+        #welcomePopup {
+            display: block; /* Show by default */
+        }
     </style>
 </head>
 <body>
 
     <div class="background"></div>
 
+    <!-- Welcome Pop-up -->
+    <div id="welcomePopup" class="popup">
+        <h2>Hey cutie 💗</h2>
+        <button class="close-btn" onclick="startHomePage()">Let's go!</button>
+    </div>
+
     <!-- Main content -->
-    <div class="content">
+    <div class="content" id="mainContent">
         <h2>Hey 💕 Dev ki Aradhana</h2>
         <p>Do you love me?</p>
         <button onclick="response('yes')">Yes</button>
@@ -148,6 +162,13 @@
     </div>
 
     <script>
+        // Function to start the homepage after the welcome popup
+        function startHomePage() {
+            document.getElementById('welcomePopup').style.display = 'none'; // Hide welcome popup
+            document.body.classList.remove('blurred'); // Remove blur effect
+            document.getElementById('mainContent').style.display = 'block'; // Show main content
+        }
+
         // Show appropriate popup and blur background
         function response(answer) {
             document.body.classList.add('blurred'); // Apply blur effect
@@ -164,9 +185,9 @@
             document.body.classList.remove('blurred'); // Remove blur effect
         }
 
-        // Show main content on page load
+        // Show the welcome popup on page load
         window.onload = function() {
-            document.querySelector('.content').style.display = 'block';
+            document.body.classList.add('blurred'); // Blur background on load
         }
     </script>
 
