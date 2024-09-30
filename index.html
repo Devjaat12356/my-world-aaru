@@ -5,7 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Page</title>
     <style>
-        /* Your existing styles */
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Background with heartbeat animation */
+        .background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.pinimg.com/originals/37/55/d0/3755d03d33bfb8b5d9b3208b8c4aaf2f.jpg') no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(8px);
+            animation: heartbeat-bg 1.5s infinite;
+            z-index: -1;
+        }
+
+        @keyframes heartbeat-bg {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14%, 28% {
+                transform: scale(1.02);
+            }
+        }
+
+        /* Pop-up style */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .popup h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #ff69b4;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+
+        .popup button:hover {
+            background-color: #ff85a2;
+        }
+
+        /* Pop-up for the angry response */
+        .gif-popup img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* Cartoon note popup */
+        .note-popup {
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .note-popup img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Emoji animations */
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            14%, 28% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes flower-animation {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes knife-shake {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .heartbeat {
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .flower {
+            display: inline-block;
+            animation: flower-animation 1s infinite;
+        }
+
+        .knife {
+            display: inline-block;
+            animation: knife-shake 0.5s infinite;
+        }
     </style>
 </head>
 <body>
@@ -24,6 +178,28 @@
         <p>Do you love me?</p>
         <button onclick="yesResponse()">Yes</button>
         <button onclick="noResponse()">No</button>
+    </div>
+
+    <!-- Third Pop-up for the NO response -->
+    <div id="gifPopup" class="popup gif-popup" style="display: none;">
+        <img src="https://media.tenor.com/RiQyOcZtLoIAAAAj/tkthao219-bubududu.gif" alt="Angry response GIF">
+        <h2>Batau abhi <span class="knife">🔪🔪</span></h2>
+        <button onclick="closeGifPopup()">Close</button>
+    </div>
+
+    <!-- Fourth Pop-up for the YES response -->
+    <div id="yesPopup" class="popup gif-popup" style="display: none;">
+        <img src="https://media.tenor.com/RG_lIajbbtQAAAAj/milk-and-mocha.gif" alt="Cute response GIF">
+        <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="flower">🌸🌸</span></h2>
+        <button onclick="openSurprise()">Open it</button>
+    </div>
+
+    <!-- Fifth Pop-up for Happy National Love Day -->
+    <div id="loveDayPopup" class="popup note-popup" style="display: none;">
+        <img src="https://media.tenor.com/4TSAv5_K3LgAAAAi/kiss-bear-kiss.gif" alt="Kiss Bear GIF">
+        <h2>Happy National Love Day, Aaru! 💖</h2>
+        <p>Wishing you lots of love and happiness today! 🌹</p>
+        <button onclick="closeLoveDayPopup()">Close</button>
     </div>
 
     <!-- Audio player (hidden) -->
@@ -50,6 +226,24 @@
         function noResponse() {
             document.getElementById('lovePopup').style.display = 'none';
             document.getElementById('gifPopup').style.display = 'block';
+        }
+
+        // Close the GIF popup and show the love question again
+        function closeGifPopup() {
+            document.getElementById('gifPopup').style.display = 'none';
+            document.getElementById('lovePopup').style.display = 'block';
+        }
+
+        // Handle the surprise button
+        function openSurprise() {
+            document.getElementById('yesPopup').style.display = 'none';
+            document.getElementById('loveDayPopup').style.display = 'block'; // Show love day popup
+        }
+
+        // Close love day popup and redirect to first popup
+        function closeLoveDayPopup() {
+            document.getElementById('loveDayPopup').style.display = 'none';
+            document.getElementById('popup').style.display = 'block'; // Redirect to first popup
         }
 
         // Show popup on page load
