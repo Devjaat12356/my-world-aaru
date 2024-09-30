@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Page with Music</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: pink;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Background with heartbeat animation */
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrvDu0iyYo4s3LutvPDL3QppsApiOdr0z_6Q&usqp=CAU');
+            background-size: cover;
+            background-position: center;
+            filter: blur(10px);
+            animation: heartbeat 4s infinite ease-in-out;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Content styling */
+        .content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 6em; /* Increased font size */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            animation: heartbeat 1s infinite; /* Heartbeat animation */
+        }
+
+        p {
+            font-size: 2.5em; /* Increased font size */
+        }
+
+        /* Button container for horizontal layout */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+            margin-top: 30px;
+        }
+
+        /* Button styling */
+        button {
+            padding: 20px 50px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #ff6b81, #f093fb);
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .yes {
+            background-color: #ff4b5c;
+        }
+
+        .no {
+            background-color: #1e1e1e;
+        }
+
+        /* Pop-up styling */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 20;
+            display: none; /* Hidden by default */
+            text-align: center;
+        }
+
+        .popup h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            background: #ff4b5c;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .popup button:hover {
+            background: #ff6b81;
+        }
+
+        /* Hidden content class for "new page" effect */
+        .hidden-content {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4em; /* Smaller font size for mobile */
+            }
+            p {
+                font-size: 1.5em;
+            }
+            button {
+                font-size: 1.2em;
+                padding: 10px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layer -->
+    <div class="background"></div>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="Ishq_Wala_Love_slowed_reverbed.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- No Button Music -->
+    <audio id="noMusic">
+        <source src="Tuchki_Tuiya_notification_tone.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Foreground Content -->
+    <div class="content">
+        <h1>Hello, Dev Ki Aradhana ❤️</h1>
+        <p>Do you love me?</p>
+
+        <!-- Button container for horizontal layout -->
+        <div class="button-container">
+            <button class="yes" onclick="showYesPopup()">Yes</button>
+            <button id="noButton" class="no" onclick="showNoPopup()">No</button>
+        </div>
+    </div>
+
+    <!-- Pop-up for Yes -->
+    <div id="yesPopup" class="popup">
+        <h2>ये हुई ना बात मोटू 😁</h2>
+        <button onclick="startNewPage()">Chale</button>
+    </div>
+
+    <!-- Pop-up for No -->
+    <div id="noPopup" class="popup">
+        <h2>बताऊ अभी 😒🔪</h2>
+        <button onclick="closeNoPopup()">Close</button>
+    </div>
+
+    <script>
+        // Get audio elements
+        const bgMusic = document.getElementById("bgMusic");
+        const noMusic = document.getElementById("noMusic");
+
+        // Show Yes popup
+        function showYesPopup() {
+            document.getElementById('yesPopup').style.display = 'block';
+        }
+
+        // Show No popup
+        function showNoPopup() {
+            document.getElementById('noPopup').style.display = 'block';
+            bgMusic.pause(); // Pause the background music
+            noMusic.play(); // Play the no button music
+        }
+
+        // Close No popup
+        function closeNoPopup() {
+            document.getElementById('noPopup').style.display = 'none';
+            noMusic.pause(); // Pause the no button music
+            bgMusic.play(); // Resume background music
+        }
+
+        // "New Page" effect by hiding content
+        function startNewPage() {
+            document.querySelector('.content').classList.add('hidden-content');
+            document.getElementById('yesPopup').classList.add('hidden-content');
+            bgMusic.play(); // Ensure background music continues
+        }
+    </script>
+</body>
+</html>
