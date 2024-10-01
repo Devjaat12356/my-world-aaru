@@ -187,11 +187,13 @@
         <button onclick="nextMessage()">Let's Go</button>
     </div>
 
-    <!-- Second Pop-up for the love question -->
+<!-- Second Pop-up for the love question -->
     <div id="lovePopup" class="popup" style="display: none;">
         <p>Do you love me?</p>
-        <button onclick="yesResponse()">Yes</button>
-        <button onclick="noResponse()">No</button>
+        <div class="button-container">
+            <button onclick="yesResponse()">Yes</button>
+            <button onclick="noResponse()">No</button>
+        </div>
     </div>
 
     <!-- Third Pop-up for the NO response -->
@@ -204,14 +206,14 @@
     <!-- Fourth Pop-up for the YES response -->
     <div id="yesPopup" class="popup gif-popup" style="display: none;">
         <img src="https://media.tenor.com/RG_lIajbbtQAAAAj/milk-and-mocha.gif" alt="Cute response GIF">
-        <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="heartbeat-fast">🫀🫀</span></h2>
+        <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="heartbeat-fast">🤌🏻🤏🏻</span></h2>
         <button onclick="openSurprise()">Open it</button>
     </div>
 
     <!-- Fifth Pop-up for Happy National Love Day -->
     <div id="loveDayPopup" class="popup note-popup" style="display: none;">
         <img src="https://media.tenor.com/4TSAv5_K3LgAAAAi/kiss-bear-kiss.gif" alt="Kiss Bear GIF">
-        <h2>Happy National Love Day, Aaru!</h2>
+        <h2>Happy National Love Day, Aaru !</h2>
         <p>Wishing you lots of love and happiness today! <span class="heartbeat-fast">🫀</span></p>
         <button onclick="closeLoveDayPopup()">Close</button>
     </div>
