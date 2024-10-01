@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ff69b4"> <!-- Theme color for mobile browser -->
-    <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon"> <!-- Favicon -->
     <title>Welcome Page</title>
     <style>
         /* Reset */
@@ -21,6 +19,7 @@
             align-items: center;
             font-family: 'Comic Sans MS', cursive, sans-serif;
             overflow: hidden;
+            padding: 20px; /* Added padding for better mobile/tablet experience */
         }
 
         /* Background with heartbeat animation */
@@ -46,10 +45,8 @@
 
         /* Pop-up style */
         .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative; /* Changed from fixed to relative */
+            margin: auto; /* Centering */
             background: #FFD4DB;
             border-radius: 15px;
             padding: 20px;
@@ -58,8 +55,8 @@
             z-index: 100;
             opacity: 0;
             animation: fadeIn 0.5s forwards;
-            width: 80%; /* Wider pop-ups on mobile */
-            max-width: 500px; /* Maximum width */
+            width: 90%; /* Changed to 90% for better mobile/tablet sizing */
+            max-width: 500px; /* Increased max-width for tablet experience */
         }
 
         @keyframes fadeIn {
@@ -71,14 +68,14 @@
         .popup h2 {
             font-size: 24px;
             font-weight: bold;
-            color: gray; /* Changed to gray */
+            color: gray;
             margin-bottom: 10px;
         }
 
         .popup p {
             font-size: 18px;
             font-weight: bold;
-            color: gray; /* Changed to gray */
+            color: gray;
             margin-bottom: 20px;
         }
 
@@ -107,8 +104,8 @@
 
         /* Cartoon note popup */
         .note-popup {
-            width: 90%;
-            max-width: 400px;
+            width: 90%; /* Same as popup */
+            max-width: 500px; /* Increased max-width for tablet experience */
             animation: fadeIn 0.5s forwards;
         }
 
@@ -177,41 +174,6 @@
                 transform: scale(1.1);
             }
         }
-
-        /* Tablet-like mobile styles */
-        @media (max-width: 768px) {
-            .popup {
-                padding: 30px; /* More padding for mobile */
-            }
-
-            .popup h2, .popup p {
-                font-size: 20px; /* Slightly larger text for readability */
-            }
-
-            .popup button {
-                padding: 12px 25px; /* Larger buttons for easier tapping */
-                font-size: 18px; /* Slightly larger font size for buttons */
-            }
-
-            .background {
-                background-size: cover; /* Ensure background covers nicely */
-                filter: blur(10px); /* Adjust blur for better aesthetics */
-            }
-        }
-
-        /* Optional scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 12px; /* Width of the scrollbar */
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background-color: #ff69b4; /* Color of the scrollbar thumb */
-            border-radius: 10px; /* Round the scrollbar */
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f0f0f0; /* Background of the scrollbar track */
-        }
     </style>
 </head>
 <body>
@@ -242,81 +204,105 @@
     <!-- Fourth Pop-up for the YES response -->
     <div id="yesPopup" class="popup gif-popup" style="display: none;">
         <img src="https://media.tenor.com/RG_lIajbbtQAAAAj/milk-and-mocha.gif" alt="Cute response GIF">
-        <h2>Achaa ji 👀 fr to Aaru ko surprise dena hoga <span class="heartbeat-fast">🫀🫀</span></h2>
+        <h2>Achaa ji 👀 fr to aapko suprise dena hoga <span class="heartbeat-fast">🫀🫀</span></h2>
         <button onclick="openSurprise()">Open it</button>
     </div>
 
     <!-- Fifth Pop-up for Happy National Love Day -->
     <div id="loveDayPopup" class="popup note-popup" style="display: none;">
         <img src="https://media.tenor.com/4TSAv5_K3LgAAAAi/kiss-bear-kiss.gif" alt="Kiss Bear GIF">
-        <h2>Happy National Love Day!</h2>
+        <h2>Happy National Love Day, Aaru!</h2>
         <p>Wishing you lots of love and happiness today! <span class="heartbeat-fast">🫀</span></p>
         <button onclick="closeLoveDayPopup()">Close</button>
     </div>
 
     <!-- Audio player -->
-    <audio id="backgroundMusic" src="https://archive.org/download/aadha-ishq-instrumental-dhq-pk/aadhaishq.mp3" loop></audio>
-    <audio id="yesPopupSound" src="https://example.com/yes-sound.mp3"></audio>
-    <audio id="noPopupSound" src="https://example.com/no-sound.mp3"></audio>
-    <audio id="openItSound" src="https://example.com/open-it-sound.mp3"></audio>
+    <audio id="backgroundMusic" src="https://archive.org/download/aadha-ishq-instrumental-dhq-pbs-7-mo-em/Aadha%20Ishq%20-%20Instrumental_DHqPbs7MoEM.mp3" preload="auto" loop></audio>
+    <audio id="yesPopupSound" src="https://archive.org/download/aadha-ishq-instrumental-dhq-pbs-7-mo-em/Aww%20Sound%20Effect_ltjT25GyXTM.mp3" preload="auto"></audio>
+    <audio id="noPopupSound" src="https://archive.org/download/aadha-ishq-instrumental-dhq-pbs-7-mo-em/Mass%20Movie%20Sad%20BGM%20Ringtone_fDoPqTLEHBU.mp3" preload="auto"></audio>
+    <audio id="openItSound" src="https://archive.org/download/aadha-ishq-instrumental-dhq-pbs-7-mo-em/Gravity%20Falls%20-%20Mabifica%20kiss%20with%20cartoon%20sound%20effects_sfx.mp3" preload="auto" loop></audio>
 
     <script>
-        // Get audio elements
+        // Global variable to hold the background music
         const music = document.getElementById('backgroundMusic');
 
-        // Function to show the next message
+        // Set initial volume for background music
+        music.volume = 0.3;
+
+        // Function to show the love question pop-up
         function nextMessage() {
             document.getElementById('popup').style.display = 'none';
             document.getElementById('lovePopup').style.display = 'block';
+            music.play();
         }
 
-        // Function for Yes response
+        // Function to handle YES response
         function yesResponse() {
             document.getElementById('lovePopup').style.display = 'none';
             document.getElementById('yesPopup').style.display = 'block';
-            document.getElementById('yesPopupSound').play();
-            music.pause(); // Pause background music
+            document.getElementById('yesPopupSound').volume = 0.2; // Set volume for yes sound
+            document.getElementById('yesPopupSound').play(); // Play the yes sound
         }
 
-        // Function for No response
-        function noResponse() {
-            document.getElementById('lovePopup').style.display = 'none';
-            document.getElementById('gifPopup').style.display = 'block';
-            document.getElementById('noPopupSound').play();
-            music.pause(); // Pause background music
-        }
-
-        // Function to close the GIF popup
-        function closeGifPopup() {
-            document.getElementById('gifPopup').style.display = 'none';
-            music.play(); // Resume background music
-        }
-
-        // Function to open the surprise
+        // Function to handle the surprise opening
         function openSurprise() {
             document.getElementById('yesPopup').style.display = 'none';
             document.getElementById('loveDayPopup').style.display = 'block';
-            document.getElementById('openItSound').play();
+            document.getElementById('openItSound').loop = true; // Loop open sound
+            document.getElementById('openItSound').volume = 0.2; // Set volume for open sound
+            document.getElementById('openItSound').play(); // Play the open sound
+            document.getElementById('yesPopupSound').pause(); // Stop yes sound immediately
+            document.getElementById('yesPopupSound').currentTime = 0; // Reset time
         }
 
-        // Function to close the Love Day popup
+        // Close love day popup and redirect to the first popup
         function closeLoveDayPopup() {
             document.getElementById('loveDayPopup').style.display = 'none';
+            document.getElementById('popup').style.display = 'block'; // Redirect to first popup
+            music.volume = 0.3; // Restore background music volume
+            document.getElementById('openItSound').pause(); // Stop the open sound immediately
+            document.getElementById('openItSound').currentTime = 0; // Reset time
         }
+
+        // Handle No response and show NO popup
+        function noResponse() {
+            document.getElementById('lovePopup').style.display = 'none';
+            document.getElementById('gifPopup').style.display = 'block';
+            music.volume = 0.1; // Reduce background music volume when no popup opens
+            document.getElementById('noPopupSound').volume = 0.2; // Set volume for no sound
+            document.getElementById('noPopupSound').play(); // Play the no sound
+        }
+
+        // Close NO popup and return to the love question popup
+        function closeGifPopup() {
+            document.getElementById('noPopupSound').pause(); // Stop the no sound immediately
+            document.getElementById('noPopupSound').currentTime = 0; // Reset time
+            document.getElementById('gifPopup').style.display = 'none';
+            document.getElementById('lovePopup').style.display = 'block';
+            music.volume = 0.3; // Restore background music volume
+            music.play(); // Ensure background music plays
+        }
+
+        // Event listener for visibility change (when the browser/app is minimized)
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                // Resume playback if the document is visible
+                music.play().catch((error) => {
+                    console.log('Playback failed:', error);
+                });
+            } else {
+                // Pause the music if the document is hidden
+                music.pause();
+                document.getElementById('openItSound').pause(); // Stop open sound
+                document.getElementById('yesPopupSound').pause(); // Stop yes sound
+                document.getElementById('noPopupSound').pause(); // Stop no sound
+            }
+        });
 
         // Play background music on page load
         window.onload = function() {
-            music.play();
+            music.play(); // Start background music
         };
-
-        // Pause music when tab or app is minimized
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                music.pause();
-            } else {
-                music.play();
-            }
-        });
     </script>
 </body>
 </html>
