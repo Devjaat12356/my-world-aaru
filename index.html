@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#FFD4DB"> <!-- This changes the browser bar color -->
+<meta name="theme-color" content="#FFD4DB"> <!-- This changes the browser bar color -->
     <title>Welcome Page</title>
     <style>
         /* Reset */
@@ -188,7 +188,7 @@
         <button onclick="nextMessage()">Let's Go</button>
     </div>
 
-    <!-- Second Pop-up for the love question -->
+<!-- Second Pop-up for the love question -->
     <div id="lovePopup" class="popup" style="display: none;">
         <p>Do you love me?</p>
         <div class="button-container">
@@ -232,43 +232,80 @@
         // Set initial volume for background music
         music.volume = 0.3;
 
-        // Start playing background music on page load
-        window.onload = function () {
-            music.play();
-            const popup = document.getElementById("popup");
-            popup.style.animation = "fadeIn 0.5s forwards";
-        };
-
+        // Function to show the love question pop-up
         function nextMessage() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("lovePopup").style.display = "block";
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('lovePopup').style.display = 'block';
+            music.play();
         }
 
+        // Function to handle YES response
         function yesResponse() {
-            document.getElementById("lovePopup").style.display = "none";
-            document.getElementById("yesPopup").style.display = "block";
-            document.getElementById("yesPopupSound").play();
+            document.getElementById('lovePopup').style.display = 'none';
+            document.getElementById('yesPopup').style.display = 'block';
+            document.getElementById('yesPopupSound').volume = 0.2; // Set volume for yes sound
+            document.getElementById('yesPopupSound').play(); // Play the yes sound
         }
 
-        function noResponse() {
-            document.getElementById("lovePopup").style.display = "none";
-            document.getElementById("gifPopup").style.display = "block";
-            document.getElementById("noPopupSound").play();
-        }
-
-        function closeGifPopup() {
-            document.getElementById("gifPopup").style.display = "none";
-        }
-
+        // Function to handle the surprise opening
         function openSurprise() {
-            document.getElementById("yesPopup").style.display = "none";
-            document.getElementById("loveDayPopup").style.display = "block";
-            document.getElementById("openItSound").play();
+            document.getElementById('yesPopup').style.display = 'none';
+            document.getElementById('loveDayPopup').style.display = 'block';
+            document.getElementById('openItSound').loop = true; // Loop open sound
+            document.getElementById('openItSound').volume = 0.2; // Set volume for open sound
+            document.getElementById('openItSound').play(); // Play the open sound
+            document.getElementById('yesPopupSound').pause(); // Stop yes sound immediately
+            document.getElementById('yesPopupSound').currentTime = 0; // Reset time
         }
 
+        // Close love day popup and redirect to the first popup
         function closeLoveDayPopup() {
-            document.getElementById("loveDayPopup").style.display = "none";
+            document.getElementById('loveDayPopup').style.display = 'none';
+            document.getElementById('popup').style.display = 'block'; // Redirect to first popup
+            music.volume = 0.3; // Restore background music volume
+            document.getElementById('openItSound').pause(); // Stop the open sound immediately
+            document.getElementById('openItSound').currentTime = 0; // Reset time
         }
+
+        // Handle No response and show NO popup
+        function noResponse() {
+            document.getElementById('lovePopup').style.display = 'none';
+            document.getElementById('gifPopup').style.display = 'block';
+            music.volume = 0.1; // Reduce background music volume when no popup opens
+            document.getElementById('noPopupSound').volume = 0.2; // Set volume for no sound
+            document.getElementById('noPopupSound').play(); // Play the no sound
+        }
+
+        // Close NO popup and return to the love question popup
+        function closeGifPopup() {
+            document.getElementById('noPopupSound').pause(); // Stop the no sound immediately
+            document.getElementById('noPopupSound').currentTime = 0; // Reset time
+            document.getElementById('gifPopup').style.display = 'none';
+            document.getElementById('lovePopup').style.display = 'block';
+            music.volume = 0.3; // Restore background music volume
+            music.play(); // Ensure background music plays
+        }
+
+        // Event listener for visibility change (when the browser/app is minimized)
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                // Resume playback if the document is visible
+                music.play().catch((error) => {
+                    console.log('Playback failed:', error);
+                });
+            } else {
+                // Pause the music if the document is hidden
+                music.pause();
+                document.getElementById('openItSound').pause(); // Stop open sound
+                document.getElementById('yesPopupSound').pause(); // Stop yes sound
+                document.getElementById('noPopupSound').pause(); // Stop no sound
+            }
+        });
+
+        // Play background music on page load
+        window.onload = function() {
+            music.play(); // Start background music
+        };
     </script>
 </body>
 </html>
